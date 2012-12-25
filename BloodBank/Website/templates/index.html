@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	
+  	<title>Salem Blood Bank - Home</title>
   	<!-- Bootstrap -->
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/static/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
     
     <!-- Jquery -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/static/js/jquery-latest.js"></script>
     <!-- bootstrap -->
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- events -->
@@ -16,7 +16,7 @@
     
   </head>
   <body>
-  	<!- navbar -->
+  	<!-- navbar -->
   	<div class="navbar">
   <div class="navbar-inner">
     <center><a class="brand" href="#">Salem Blood Bank</a></center>
@@ -26,12 +26,6 @@
 
   	<div class="container-fluid">
   		<div class="row-fluid">
-  			<!-- head image -->
-  			<div class="span12" >
-  				<center><h3> Blood Donor Search</h3></center>
-  			</div>
-  			<!-- body row -->
-  		<div class="row-fluid">
   			<!-- login -->
   			<div class="span3 row-fluid" >
   				{% include "login.html" %}
@@ -39,7 +33,7 @@
   			</div>
   			<!-- load image -->	
   			<div class="span5" >
-  				<img class="hidden-phone" src="static/img/blood_load.png"/>
+  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="static/img/blood_load.png"/>
   				{% include "search.html"%}
   			</div>	
   			<!-- instructions -->
@@ -49,8 +43,6 @@
   			</div> 
   			
   		</div>
-  	</div>
-  	
   </body>
   <footer>
   <!-- <div class="navbar"> -->
