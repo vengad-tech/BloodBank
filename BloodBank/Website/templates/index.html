@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	
+  	<!-- Bootstrap -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    
+    <!-- Jquery -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- bootstrap -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- events -->
+    <script src="/static/js/events.js"></script>
+    
+  </head>
+  <body>
+  	<!- navbar -->
+  	<div class="navbar">
+  <div class="navbar-inner">
+    <center><a class="brand" href="#">Salem Blood Bank</a></center>
+   
+  </div>
+</div>
+
+  	<div class="container-fluid">
+  		<div class="row-fluid">
+  			<!-- head image -->
+  			<div class="span12" >
+  				<center><h3> Blood Donor Search</h3></center>
+  			</div>
+  			<!-- body row -->
+  		<div class="row-fluid">
+  			<!-- login -->
+  			<div class="span3 row-fluid" >
+  				{% include "login.html" %}
+  				{% include "register.html" %}
+  			</div>
+  			<!-- load image -->	
+  			<div class="span5" >
+  				<img class="hidden-phone" src="static/img/blood_load.png"/>
+  				{% include "search.html"%}
+  			</div>	
+  			<!-- instructions -->
+  			<div class="span4">
+  				{% include "rules.html" %}
+  			</div>
+  			</div> 
+  			
+  		</div>
+  	</div>
+  	
+  </body>
+  <footer>
+  <!-- <div class="navbar"> -->
+  <div class="navbar-inner">
+    <center>© Youth Red Cross, Sona College</center>
+  </div>
+ <!-- </div> -->
+  </footer>
+</html>
