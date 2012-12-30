@@ -1,20 +1,31 @@
+ <form id="form_login" action="" method="post">	
+ 		{% csrf_token %}
+
  	<div id="form_login">
  		<legend>Login to proceed</legend>
  		<table>
   	<tr>
   		
   	<td> Email:</td>
-    <td><input id="emailid" autofocus="yes" onfocusout="validate-email" type="text" placeholder="Email Address"> </td>
+    <td><input id="emailid" name="log_emailid" autofocus="yes" onfocusout="validate-email" type="text" placeholder="Email Address" value="{{ form.log_emailid.value }}">
+	<br /><span class="error"> {{form.log_emailid.errors.as_text}} </span>
+    	</td>
     </tr>
     <tr>
    <td>Password:</td>
-   <td><input id="pswd" type="password"  placeholder="Password"></td>
+   <td><input id="pswd" type="password" name="log_pswd" placeholder="Password">
+   	<br /> <span class="error"> {{ form.log_pswd.errors.as_text}} </span>
+   </td></tr>
+<tr>   		<td></td> <td><a href="http://google.com" id="forgotpswd" name="log_forgotpswd">Forgot Password!</a>
+
+   </td>
    </tr>
    <tr>
-    <td><button  class="btn">Login</button></td>
-<td><button id="btn_register"  class="btn">Register</button></td>
+   	<td></td>
+    <td><button  class="btn">Login</button>
+    	&nbsp;&nbsp;&nbsp;&nbsp;<a id="btn_register"  class="btn">Register</a></td>
     </tr>
   </table>
 
-</div>
-  				
+	</div>
+</form>

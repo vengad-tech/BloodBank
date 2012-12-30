@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Salem Blood Bank - Search</title>
+    <title>Salem Blood Bank - Profile</title>
 	  	<!-- Bootstrap -->
 	  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -27,70 +27,93 @@
   		<div class="row-fluid">
   			<!-- login -->
   			<div class="span4 row-fluid" >
-  	  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="/static/img/blood_load.png"/>
+  	
+  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="/static/img/blood_load.png"/>
   				
   			</div>
   			
   			<div class="span5" >
   	<ul class="nav nav-pills">
-    <li>
+    <!-- <li>
     <a href="/home/">Home</a>
-    </li>
-    <li class="active"><a href="/search">Search</a></li>
-    <li><a href="/profile">Profile</a></li>
+    </li> -->
+    <li><a href="/search">Search</a></li>
+    <li class="active"><a href="/profile">My Profile</a></li>
+    <li><a href="/home">Logout</a></li>
     </ul>
-
-  				<legend>Search Donor</legend>
+  				<legend>My Profile</legend>
 <table>
 	<tr>
+<td>
+	Name:
+</td>	
+<td><input type="text" name="prof_name" placeholder="Your Full Name" /></td>	
+	</tr>
+	<tr><td>
+		Emailid:
+	</td>
+	<td>
+		<input type="email" name="prof_emailid" placeholder="Primary Email Id" />
+	</td>
+	</tr>
+	<tr>
 		<td>
-			Blood Group:
+			New Password:
 		</td>
 		<td>
-			<select name="srch_bloodgroup">
-	<option>A1+</option>
-	<option>A1-</option>
-	<option>A2+</option>
-	<option>A2-</option>
-	<option>B+</option>
-	<option>B-</option>
-	<option>A1B+</option>
-	<option>A1B-</option>
-	<option>A2B+</option>
-	<option>A2B-</option>
-	<option>AB+</option>
-	<option>AB-</option>
-	<option>O+</option>
-	<option>O-</option>
-	<option>A+</option>
-	<option>A-</option>
-</select>
+			<input type="password" name="prof_pswd" placeholder="New Password" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Confirm Password:
+		</td>
+		<td>
+			<input type="password" name="prof_cnfpswd" placeholder="Confirm New Password" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Mobile:
+		</td>
+		<td>
+			<input type="tel" name="prof_mobile" placeholder="Mobile" />
+		</td>
+	</tr>
+	<tr><td></td>
+		<td>
+			<input type="checkbox" name="prof_hidemob" /> Hide Mobile Number
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Last Blood Donation Date:
+		</td>
+		<td>
+			<input type="date" name="prof_dolbd" placeholder="Last Blood DOnation Date" />
 		</td>
 	</tr>
 	<tr>
 		<td>City:</td>
 		<td>
-			<select id="srch_city">
-				<option>Salem</option>
-				<option>Coimbatore</option>
-				<option>Madurai</option>
-				<option>Erode</option>
-				<option>Chennai</option>
-			</select>
+			<select name="reg_city">
+	<option>Salem</option>
+	<option>Coimbatore</option>
+	<option>Madurai</option>
+	<option>Erode</option>
+</select>
 		</td>
-		
 	</tr>
 	<tr>
-		<td></td>
 		<td>
-			<button id="btn_srch_donor" class="btn">Find Donor</button>
+			
+		</td>
+		<td>
+			<button class="btn">Save</button>
+		
+			<button class="btn">Reset</button>
 		</td>
 	</tr>
-</table>
-<!--Search results of Blood Donors-->
-<table class="table table-hover">
-	
-	
 </table>
   			</div>	
   			

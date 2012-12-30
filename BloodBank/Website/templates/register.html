@@ -1,10 +1,43 @@
- <div id="form_register" style="display: none"> 
+<form id="form_register" action="/register/" method="post" >
+	{% csrf_token %}
  	<legend>Register to proceed</legend>
- 	<input id="name" type="text" placeholder="Name" />
-<br />	<input id="reg_email" type="text" placeholder="E-mail Id" />
-<br />	<input id="reg_pswd" type="password" placeholder="Password" />
-<br />	<input id="reg_cnfpswd" type="password" placeholder="ReType Password" />
-<br />	<select><option>-Select Blood Group-</option>
+ 	<table>
+<tr><td>Name </td>
+	<td><input name= "reg_name" id="name" type="text" value="{{ form.reg_name.value }}" placeholder="Your Full Name" />
+		<br /> {{form.reg_name.errors.as_text}}
+	</td></tr>
+<tr>
+	<td>
+	Email-Id	
+	</td>
+	<td><input id="reg_email" name="reg_emailid" type="text" value="{{ form.reg_emailid.value }}" placeholder="Primary Mail Address" />
+	<br />	{{ form.reg_emailid.errors.as_text }}
+	</td>
+</tr>
+<tr>
+	<td>
+	Password
+	</td>
+	<td>
+	<input id="reg_pswd" name="reg_pswd" type="password" placeholder="Secret Word" />
+		
+	</td>
+</tr>
+<tr>
+	<td>
+		Re-Type Password
+	</td>
+	<td>
+		<input id="reg_cnfpswd" name="reg_cnfpswd" type="password" placeholder="Confirm Secret Word" />
+		<br /> {{ form.reg_cnfpswd.errors.as_text }}
+	</td>
+</tr>
+<tr>
+	<td>
+		Blood Group
+	</td>
+	<td>
+		<select name="reg_bloodgroup" value="{{ form.reg_bloodgroup.as_text }}">
 	<option>A1+</option>
 	<option>A1-</option>
 	<option>A2+</option>
@@ -22,25 +55,89 @@
 	<option>A+</option>
 	<option>A-</option>
 </select>
-<br /> 	<input id="mob" type="tel" placeholder="Mobile Number" />
-<br /> 	<input name="sex" type="radio"  value="Male" />Male
-	 	<input name="sex" type="radio" value="Female" />Female
-<br /> DateOfBirth:
-<br /> <input id="dob" type="date" placeholder="Month/Day/Year" />
-<br /> Last Donation Date:
-<br /> <input id="dolbd" type="date" placeholder="Month/Day/Year" />
-<br /> <input id="hidemob" type="checkbox" />Hide Contact Numbers
-
-<br /> <select><option>-Select City-</option>
+<br /> {{ form.reg_bloodgroup.errors.as_text }}
+	</td>
+</tr>
+<tr>
+	<td>
+		Mobile 
+	</td>
+	<td>
+		<input id="mob" name="reg_mobile" type="tel" placeholder="Primary Mobile Number" value="{{ form.reg_mobile.value }}" />
+		<br /> {{ form.reg_mobile.errors.as_text }}
+		 </td>
+</tr>
+<tr>
+	<td></td>
+	<td>
+		<input id="hidemob" name="reg_hidemob" type="checkbox" />
+		 Hide Contact Numbers
+	</td>
+</tr>
+<tr>
+	<td>
+<br />		Sex
+	</td>
+	<td>
+		<input name="reg_sex" type="radio" value="Male" checked="true"/>Male
+	 	<input name="reg_sex" type="radio" value="Female" disabled="true" />Female
+	 	
+	</td>
+</tr>
+<tr>
+	<td>
+		DateOfBirth:
+	</td>
+	<td>
+		<input id="dob" name="reg_dob" type="date" placeholder="Month/Day/Year" value="{{ form.reg_dob.value }}" />
+		<br /> {{ form.reg_dob.errors.as_text }}
+	</td>
+</tr>
+<tr>
+	<td>
+Last Donation Date:
+		
+	</td>
+	<td>
+		<input name="reg_dolbd" id="dolbd" type="date" placeholder="Month/Day/Year" value="{{ form.reg_dolbd.value }}" />
+		<br /> {{ form.reg_dolbd.errors.as_text }}
+	</td>
+</tr>
+<tr>
+	<td>
+		City
+	</td>
+	<td>
+		<select name="reg_city">
 	<option>Salem</option>
 	<option>Coimbatore</option>
+	<option>Madurai</option>
 	<option>Erode</option>
 </select>
-<br /> <select><option>-Select Area-</option>
+{{ form.reg_city.as_text }}
+	</td>
+</tr>
+<!-- <tr>
+	<td>
+		Locality 
+	</td>
+	<td>
+		<select name="reg_locality" ><option>-Select Area-</option>
 	<option>Peramanoor</option>
 	<option>Suramangalam</option>
 	<option>Ammapet</option>
 	<option>FairLands</option>
-	
+	<option>Muthupat</option>
 </select>
-</div>
+	</td>
+</tr> -->
+<tr>
+	<td></td>
+	<td>
+		<button class="btn" type="submit" id="btn_reg_submit">Submit</button>
+		<button class="btn" id="btn_reg_reset" type="reset">Reset</button>
+	</td>
+</tr>
+</table>
+
+</form>

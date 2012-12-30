@@ -2,10 +2,17 @@ $(document).ready(function()
 {
 $("#btn_register").click(function(){
 	
-	$("#form_login").hide();
-	$("#form_register").show();
+	window.location = "/register";
 });
 	
 });
 
 
+$(document).ready(function()
+{
+$("#btn_login").click(function(){
+		
+		window.location = "/profile";
+});
+
+});
