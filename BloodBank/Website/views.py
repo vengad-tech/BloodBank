@@ -1,15 +1,18 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirectBase
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.shortcuts import redirect
 from forms import RegisterForm
 from forms import LoginForm
+from forms import SearchForm
 from django.core.context_processors import csrf
 from models import RegisteredUsers
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from auth import login
 from auth import islogin
 from auth import logout
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def register(request):
     if request.method == 'POST': # If the form has been submitted...
         form = RegisterForm(request.POST) # A form bound to the POST data
@@ -52,8 +55,9 @@ def home(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             log_emailid = form.cleaned_data["log_emailid"]
-            login(request,log_emailid)
-            return render_to_response('profile.html')
+            user = RegisteredUsers.objects.get(email=log_emailid)
+            login(request,log_emailid,user.name)
+            return HttpResponseRedirect("/search")
 #            return HttpResponse("Logged In success")
         else:
             c={}
@@ -61,20 +65,58 @@ def home(request):
             c.update({"form":form})
             return render_to_response('index.html',c)
     if(islogin(request)):
-        logout(request)
-        return HttpResponse("Already Logined")
+        return HttpResponseRedirect("/search")
         
     c = {} 
     c.update(csrf(request))
     return render_to_response('index.html',c)
 
 def search(request):
-    return render_to_response('search.html')
-
+    
+    if islogin(request):
+        city = request.GET.get("srch_city")
+        bloodgroup = request.GET.get("srch_bloodgroup")
+        page = request.GET.get("page")
+        if page == None:
+            page = 1
+        page = int(page)
+        if city != None and bloodgroup != None:
+            results = RegisteredUsers.objects.filter(city=city,bloodgroup=bloodgroup)
+            paginator = Paginator(results, 10)
+            name = request.session.get("name",None)
+            c={}
+            c.update({"user":name})
+            c.update({"city":city,"bloodgroup":bloodgroup})
+            try:
+                results = paginator.page(page)
+            except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+                results = paginator.page(1)
+            except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+                results = paginator.page(paginator.num_pages)
+            c.update({"results":results})    
+            return render_to_response("search.html",c)
+            
+        name = request.session.get("name",None)
+        c={}
+        c.update({"user":name})
+        return render_to_response('search.html',c)
+    else:
+        return HttpResponseRedirect("/home")
+def logoutsite(request):
+    logout(request)
+    return HttpResponseRedirect('/home')
 def profile(request):
     if(islogin(request)):
-        return render_to_response('profile.html')
-    else:
-        c = {} 
+        c={}
         c.update(csrf(request))
-        return render_to_response('index.html',c)
+        email = request.session.get('email',None)
+        userprof = RegisteredUsers.objects.get(email=email)
+        #userprof = userprof[0]
+        #return HttpResponse(str(vars(userprof)))
+        c.update({"userprof":userprof})
+        return render_to_response('profile.html',c)
+#        return render_to_response('profile.html',c)
+    else:
+        return HttpResponseRedirect("/home")

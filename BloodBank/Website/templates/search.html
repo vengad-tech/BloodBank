@@ -32,14 +32,15 @@
   			</div>
   			
   			<div class="span5" >
+  				Welcome {{ user }} , <br/><br/>
   	<ul class="nav nav-pills">
-    <li>
-    <a href="/home/">Home</a>
-    </li>
+    
     <li class="active"><a href="/search">Search</a></li>
     <li><a href="/profile">Profile</a></li>
+    <li><a href="/logoutsite">Logout</a></li>
     </ul>
-
+<form method="get" >
+	
   				<legend>Search Donor</legend>
 <table>
 	<tr>
@@ -70,7 +71,7 @@
 	<tr>
 		<td>City:</td>
 		<td>
-			<select id="srch_city">
+			<select id="srch_city" name="srch_city">
 				<option>Salem</option>
 				<option>Coimbatore</option>
 				<option>Madurai</option>
@@ -83,13 +84,41 @@
 	<tr>
 		<td></td>
 		<td>
-			<button id="btn_srch_donor" class="btn">Find Donor</button>
+			<button id="btn_srch_donor" class="btn" type="submit">Find Donor</button>
 		</td>
 	</tr>
 </table>
+</form>
 <!--Search results of Blood Donors-->
+{% if results != None %}
+<ul class="pager">
+  
+   {% if results.has_previous %}
+           <li> <a href="?srch_city={{ city|urlencode }}&srch_bloodgroup={{ bloodgroup|urlencode }}&page={{ results.previous_page_number }}">previous</a>
+        </li>
+        {% endif %}
+
+        <span class="current">
+            Page {{ results.number }} of {{ results.paginator.num_pages }}.
+        </span>
+
+        {% if results.has_next %}
+       <li>     <a href="?srch_city={{ city|urlencode }}&srch_bloodgroup={{ bloodgroup|urlencode }}&page={{ results.next_page_number }}">next</a>
+    </li>
+        {% endif %}
+</ul>
+
+
+
+{% endif %}
 <table class="table table-hover">
-	
+	{% for user in results %}
+	<tr>
+		<td>{{ user.name }}</td>
+		<td>{{ user.email }}</td>
+		<td>{{ user.mobile }}</td>
+	</tr>
+	{% endfor %}
 	
 </table>
   			</div>	

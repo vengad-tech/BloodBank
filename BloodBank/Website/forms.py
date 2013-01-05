@@ -98,5 +98,8 @@ class LoginForm(forms.Form):
             msg =u"Invalid User Name or Password "
             self._errors["log_pswd"] = self.error_class([msg])
         return cleaned_data
+class SearchForm(forms.Form):
+    srch_bloodgroup = forms.CharField(6,3)
+    srch_city = forms.CharField(20,3)
     
         

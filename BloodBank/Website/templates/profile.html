@@ -39,7 +39,7 @@
     </li> -->
     <li><a href="/search">Search</a></li>
     <li class="active"><a href="/profile">My Profile</a></li>
-    <li><a href="/home">Logout</a></li>
+    <li><a id="lnk_logout" href="/logoutsite">Logout</a></li>
     </ul>
   				<legend>My Profile</legend>
 <table>
@@ -53,7 +53,7 @@
 		Emailid:
 	</td>
 	<td>
-		<input type="email" name="prof_emailid" placeholder="Primary Email Id" />
+		<input type="email" name="prof_emailid" placeholder="Primary Email Id" value="{{ userprof.email }}" />
 	</td>
 	</tr>
 	<tr>
