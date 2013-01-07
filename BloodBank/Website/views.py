@@ -15,7 +15,9 @@ import datetime
 from datetime import timedelta
 from auth import islogin
 from auth import logout
+from forms import PasswordForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+#from django.contrib.formtools.tests.wizard.forms import request
 def register(request):
     if request.method == 'POST': # If the form has been submitted...
         form = RegisterForm(request.POST) # A form bound to the POST data
@@ -152,3 +154,34 @@ def profile(request):
 #        return render_to_response('profile.html',c)
     else:
         return HttpResponseRedirect("/home")
+    
+def changepswd(request):
+    if(islogin(request)==False):
+        return HttpResponseRedirect("/home")
+    emailid = request.session.get("email",None)
+    if request.method =="POST":
+        form = PasswordForm(request.POST)
+        if form.is_valid():
+            try:
+                user = RegisteredUsers.objects.get(email=emailid)
+                user.pswd = form.cleaned_data["new_pswd"]
+                user.save()
+                c= {}
+                c.update(csrf(request))
+                c.update({"emailid":emailid})
+                c.update({"updated":True})
+                return render_to_response("changepswd.html",c)
+            except:
+                return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
+        else:
+            c={}
+            c.update(csrf(request))
+            c.update({"passwordform":form})
+            c.update({"emailid":emailid})
+            #return HttpResponse(str(vars(form)))
+            return render_to_response("changepswd.html",c)    
+    c={}
+    c.update(csrf(request))
+    
+    c.update({"emailid":emailid})
+    return render_to_response("changepswd.html",c)

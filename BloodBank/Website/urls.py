@@ -20,4 +20,6 @@ urlpatterns = patterns('',
 #    url(r'','Website.views.home'),
     url(r'search','Website.views.search'),
     url(r'profile','Website.views.profile'),    
+    url(r'changepswd','Website.views.changepswd'),    
+
 )

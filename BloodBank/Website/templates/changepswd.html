@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Salem Blood Bank - Profile</title>
+    <title>Salem Blood Bank - Change Password</title>
 	  	<!-- Bootstrap -->
 	  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -38,69 +38,46 @@
     <a href="/home/">Home</a>
     </li> -->
     <li><a href="/search">Search</a></li>
-    <li class="active"><a href="/profile">My Profile</a></li>
-    <li><a href="/changepswd">Change Password</a></li>
+    <li><a href="/profile">My Profile</a></li>
+    <li class="active"><a href="/changepswd">Change Password</a></li>
     <li><a id="lnk_logout" href="/logoutsite">Logout</a></li>
     </ul>
     <form method="POST">
     	{% if updated %}
     	<div class="alert alert-success">
-    	Updated Successfully !!
+    	Password Changed Successfully !!
     	</div>
     	{% endif %}
     	{% csrf_token %}
-  				<legend>My Profile</legend>
+  				<legend>Change Password</legend>
 <table>
-	<tr>
-<td>
-	Name:
-</td>	
-<td>
-	<input type="hidden" name="prof_oldemail" value="{{ oldemail }}"/>
-	<input type="text" name="prof_name" placeholder="Your Full Name"  value="{% firstof userprof.prof_name.value userprof.name %}"/></td>	
-	<br /> {{userprof.prof_name.errors.as_text}}
-	</tr>
-	<tr><td>
-		Emailid:
+<tr>
+	<td>
+		Old Password:
 	</td>
 	<td>
-		<input type="email" name="prof_emailid" placeholder="Primary Email Id" value="{% firstof userprof.prof_emailid.value userprof.email %}" />
-	<br /> {{userprof.prof_emailid.errors.as_text}}
+		<input type="hidden" name="emailid" value="{{ emailid }}" />
+		<input type="password" name="old_pswd" placeholder="Old Password"  />
+		<br /> {{ passwordform.old_pswd.errors.as_text }}
 	</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td>
-			Mobile:
-		</td>
-		<td>
-			<input type="tel" name="prof_mobile" placeholder="Mobile" value="{% firstof userprof.prof_mobile.value userprof.mobile %}"/>
-		<br /> {{userprof.prof_mobile.errors.as_text}}
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			Last Blood Donation Date:
-		</td>
-		<td>
-			<input  type="text" name="prof_dolbd" placeholder="Date/Month/Year" value="{% if userprof.dolbd %}{{ userprof.dolbd|date:"d-m-Y"}} {% else %} {{userprof.prof_dolbd.value  }} {% endif %}"/>
-		<br /> {{userprof.prof_dolbd.errors.as_text}}
-		</td>
-	</tr>
-	<tr>
-		<td>City:</td>
-		<td>
-			<select name="prof_city" value="">
-	<option {% if userprof.city == 'Salem' or userprof.prof_city.value == "Salem" %}selected {% endif %}>Salem</option>
-	<option {% if userprof.city == 'Coimbatore' or userprof.prof_city.value == "Coimbatore"%}selected {% endif %}>Coimbatore</option>
-	<option  {% if userprof.city == 'Madurai' or userprof.prof_city.value == "Madurai" %}selected {% endif %} >Madurai</option>
-	<option {% if userprof.city == 'Erode' or userprof.prof_city.value == "Erode" %}selected {% endif %} >Erode</option>
-</select>
-		</td>
-	</tr>
+</tr>
+<tr>
+	<td>
+		New Password:
+	</td>
+	<td>
+		<input type="password" name="new_pswd" placeholder="New Password" />
+	</td>
+</tr>
+<tr>
+	<td>
+		Confirm New Password:
+	</td>
+	<td>
+		<input type="password" name="cnf_new_pswd" placeholder="Retype New Password" />
+	<br /> {{ passwordform.cnf_new_pswd.errors.as_text }}
+	</td>
+</tr>
 	<tr>
 		<td>
 			

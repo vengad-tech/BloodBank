@@ -165,4 +165,42 @@ class SearchForm(forms.Form):
     srch_bloodgroup = forms.CharField(6,3)
     srch_city = forms.CharField(20,3)
     
-        
+class PasswordForm(forms.Form):
+    emailid = forms.EmailField()
+    old_pswd=forms.CharField(30,5)
+    new_pswd=forms.CharField(30,5)
+    cnf_new_pswd = forms.CharField(30,5)
+    def clean(self):
+        cleaned_data = super(PasswordForm, self).clean()
+        emailid=cleaned_data["emailid"]
+        old_pswd = ""
+        try:
+            old_pswd = cleaned_data["old_pswd"]
+        except:
+            old_pswd = None
+            msg =u"Invalid Password "
+            self._errors["old_pswd"] = self.error_class([msg])
+            return cleaned_data
+        new_pswd = ""
+        cnf_new_pswd =""
+        try:
+            new_pswd = cleaned_data["new_pswd"]
+            cnf_new_pswd = cleaned_data["cnf_new_pswd"]
+        except:
+            msg =u"Invalid Password or Empty"
+            self._errors["cnf_new_pswd"] = self.error_class([msg])
+            #self._errors["cnf_new_pswd"] = "Invalid Password or Empty"
+            return cleaned_data
+        try:
+            users = RegisteredUsers.objects.filter(email=emailid,pswd=old_pswd)
+            if len(users) == 0:
+                msg =u"Wrong Password"
+                self._errors["old_pswd"] = self.error_class([msg])
+            if new_pswd != cnf_new_pswd :
+                msg =u"Passwords do not match"
+                self._errors["cnf_new_pswd"] = self.error_class([msg])
+        except:
+            msg =u"Unknown Error occured,Try after some time"
+            self._errors["cnf_new_pswd"] = self.error_class([msg])
+        return cleaned_data
+            
