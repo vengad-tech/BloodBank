@@ -1,8 +1,71 @@
 from django import forms
+from BloodBank import settings
 import datetime
 from datetime import timedelta
 import re
 from models import RegisteredUsers
+class ProfileForm(forms.Form):
+    prof_oldemail=forms.EmailField()
+    prof_name = forms.CharField(30,3)
+    prof_emailid = forms.EmailField()
+    prof_mobile = forms.IntegerField()
+    prof_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    prof_city = forms.CharField(20,3)
+    def clean(self):
+        cleaned_data = super(ProfileForm, self).clean()
+        prof_emailid = cleaned_data.get("prof_emailid")
+        prof_oldemail = cleaned_data.get("prof_oldemail")
+        prof_dob = cleaned_data.get("prof_dob")
+        prof_dolbd = cleaned_data.get("prof_dolbd")
+        today = datetime.date.today()
+        prof_mobile = cleaned_data.get("prof_mobile")
+        prof_name = cleaned_data.get("prof_name")
+        #18 yrs minimum to donate blood
+        year = timedelta(days=365*18)
+        try:
+            if prof_dob > today - year :
+                msg = u"Must be 18 years or Older "
+                self._errors["prof_dob"] = self.error_class([msg])
+        except:
+            pass
+        try:
+            if  prof_dolbd > today :
+                msg = u"Enter a Resonable Date "
+                self._errors["prof_dolbd"] = self.error_class([msg])
+        except:
+            pass
+        try:
+            if prof_mobile < 7000000000 or prof_mobile > 9999999999:
+                msg = u"Invalid Mobile number "
+                self._errors["prof_mobile"] = self.error_class([msg])
+        except:
+            pass
+        try:
+            if re.match(r'^[a-zA-Z.]*$', prof_name) is None:
+                msg = u"Invalid Characters in Name "
+                self._errors["prof_name"] = self.error_class([msg])
+        except:
+            pass
+                
+        #checking if email id is already registerd or not 
+        try:
+            if prof_emailid != prof_oldemail :
+                user = RegisteredUsers.objects.filter(email=prof_emailid)
+                if len(user) > 0 :
+                    msg = u"Email ID already registerd "
+                    self._errors["prof_emailid"] = self.error_class([msg])
+        except:        
+            pass
+            
+         
+        
+        
+        
+
+        # Always return the full collection of cleaned data.
+        return cleaned_data
+
+        
 class RegisterForm(forms.Form):
     reg_name=forms.CharField(30,3)
     reg_emailid = forms.EmailField()
@@ -12,8 +75,8 @@ class RegisterForm(forms.Form):
     reg_mobile = forms.IntegerField()
     reg_hidemob = forms.CharField(required=False)
     reg_sex = forms.CharField(6,4)
-    reg_dob = forms.DateField()
-    reg_dolbd = forms.DateField()
+    reg_dob = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    reg_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     reg_city = forms.CharField(20,3)
     def clean(self):
         

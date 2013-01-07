@@ -6,10 +6,13 @@ from django.shortcuts import redirect
 from forms import RegisterForm
 from forms import LoginForm
 from forms import SearchForm
+from forms import ProfileForm
 from django.core.context_processors import csrf
 from models import RegisteredUsers
 from django.shortcuts import render
 from auth import login
+import datetime
+from datetime import timedelta
 from auth import islogin
 from auth import logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -35,7 +38,7 @@ def register(request):
                 user.save()
             except:
                 return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
-            return HttpResponse("validation sucessfull and regsiterd .. Redirecting ..")
+            return render_to_response("login_redirect.html",{})
             #return HttpResponseRedirect('/registered/') # Redirect after POST
         else:
             c={}
@@ -81,7 +84,9 @@ def search(request):
             page = 1
         page = int(page)
         if city != None and bloodgroup != None:
-            results = RegisteredUsers.objects.filter(city=city,bloodgroup=bloodgroup)
+            today = datetime.date.today()
+            three_months = timedelta(days=90)
+            results = RegisteredUsers.objects.filter(city=city,bloodgroup=bloodgroup).exclude(dolbd__gt=(today-three_months))
             paginator = Paginator(results, 10)
             name = request.session.get("name",None)
             c={}
@@ -109,12 +114,39 @@ def logoutsite(request):
     return HttpResponseRedirect('/home')
 def profile(request):
     if(islogin(request)):
+        if request.method == "POST":
+            form = ProfileForm(request.POST)
+            if form.is_valid():
+                user = RegisteredUsers.objects.get(email=request.session.get("email",None))
+                try:
+                    user.email = form.cleaned_data["prof_emailid"]
+                    user.name = form.cleaned_data["prof_name"]
+                    user.dolbd = form.cleaned_data["prof_dolbd"]
+                    user.mobile = form.cleaned_data["prof_mobile"]
+                    user.city = form.cleaned_data["prof_city"]
+                    user.save()
+                except:
+                    return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
+                c={}
+                c.update(csrf(request))
+                email = request.session.get('email',None)
+                c.update({"oldemail":email})
+                c.update({"userprof":user,"updated":True})
+                return render_to_response('profile.html',c)
+            else:
+                c={}
+                email = request.session.get('email',None)
+                c.update({"oldemail":email})
+                c.update(csrf(request))
+                c.update({"userprof":form})
+                return render_to_response('profile.html',c)
         c={}
         c.update(csrf(request))
         email = request.session.get('email',None)
         userprof = RegisteredUsers.objects.get(email=email)
         #userprof = userprof[0]
         #return HttpResponse(str(vars(userprof)))
+        c.update({"oldemail":email})
         c.update({"userprof":userprof})
         return render_to_response('profile.html',c)
 #        return render_to_response('profile.html',c)

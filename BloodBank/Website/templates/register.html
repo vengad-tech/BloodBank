@@ -89,7 +89,7 @@
 		DateOfBirth:
 	</td>
 	<td>
-		<input id="dob" name="reg_dob" type="date" placeholder="Month/Day/Year" value="{{ form.reg_dob.value }}" />
+		<input id="dob" name="reg_dob" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dob.value }}" />
 		<br /> {{ form.reg_dob.errors.as_text }}
 	</td>
 </tr>
@@ -99,7 +99,7 @@ Last Donation Date:
 		
 	</td>
 	<td>
-		<input name="reg_dolbd" id="dolbd" type="date" placeholder="Month/Day/Year" value="{{ form.reg_dolbd.value }}" />
+		<input name="reg_dolbd" id="dolbd" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dolbd.value }}" />
 		<br /> {{ form.reg_dolbd.errors.as_text }}
 	</td>
 </tr>
@@ -109,12 +109,12 @@ Last Donation Date:
 	</td>
 	<td>
 		<select name="reg_city">
-	<option>Salem</option>
-	<option>Coimbatore</option>
-	<option>Madurai</option>
-	<option>Erode</option>
+	<option {% if form.reg_city.value == "Salem" %}selected{% endif %}>Salem</option>
+	<option {% if form.reg_city.value == "Coimbatore" %}selected{% endif %}>Coimbatore</option>
+	<option {% if form.reg_city.value == "Madurai" %}selected{% endif %}>Madurai</option>
+	<option {% if form.reg_city.value == "Erode" %}selected{% endif %}>Erode</option>
 </select>
-{{ form.reg_city.as_text }}
+{{ form.reg_city.errors.as_text }}
 	</td>
 </tr>
 <!-- <tr>

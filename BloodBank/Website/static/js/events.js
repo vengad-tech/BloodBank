@@ -16,3 +16,12 @@ $("#btn_login").click(function(){
 });
 
 });
+
+$(document).ready(function()
+{
+$("#lnk_logout").click(function(){
+		
+		window.location = "/home";
+});
+
+});

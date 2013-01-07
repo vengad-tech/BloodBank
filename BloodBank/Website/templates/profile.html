@@ -41,66 +41,62 @@
     <li class="active"><a href="/profile">My Profile</a></li>
     <li><a id="lnk_logout" href="/logoutsite">Logout</a></li>
     </ul>
+    <form method="POST">
+    	{% if updated %}
+    	<div class="alert alert-success">
+    	Updated Successfully !!
+    	</div>
+    	{% endif %}
+    	{% csrf_token %}
   				<legend>My Profile</legend>
 <table>
 	<tr>
 <td>
 	Name:
 </td>	
-<td><input type="text" name="prof_name" placeholder="Your Full Name" /></td>	
+<td>
+	<input type="hidden" name="prof_oldemail" value="{{ oldemail }}"/>
+	<input type="text" name="prof_name" placeholder="Your Full Name"  value="{% firstof userprof.prof_name.value userprof.name %}"/></td>	
+	<br /> {{userprof.prof_name.errors.as_text}}
 	</tr>
 	<tr><td>
 		Emailid:
 	</td>
 	<td>
-		<input type="email" name="prof_emailid" placeholder="Primary Email Id" value="{{ userprof.email }}" />
+		<input type="email" name="prof_emailid" placeholder="Primary Email Id" value="{% firstof userprof.prof_emailid.value userprof.email %}" />
+	<br /> {{userprof.prof_emailid.errors.as_text}}
 	</td>
 	</tr>
-	<tr>
-		<td>
-			New Password:
-		</td>
-		<td>
-			<input type="password" name="prof_pswd" placeholder="New Password" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Confirm Password:
-		</td>
-		<td>
-			<input type="password" name="prof_cnfpswd" placeholder="Confirm New Password" />
-		</td>
-	</tr>
+	
+	
+	
 	<tr>
 		<td>
 			Mobile:
 		</td>
 		<td>
-			<input type="tel" name="prof_mobile" placeholder="Mobile" />
+			<input type="tel" name="prof_mobile" placeholder="Mobile" value="{% firstof userprof.prof_mobile.value userprof.mobile %}"/>
+		<br /> {{userprof.prof_mobile.errors.as_text}}
 		</td>
 	</tr>
-	<tr><td></td>
-		<td>
-			<input type="checkbox" name="prof_hidemob" /> Hide Mobile Number
-		</td>
-	</tr>
+
 	<tr>
 		<td>
 			Last Blood Donation Date:
 		</td>
 		<td>
-			<input type="date" name="prof_dolbd" placeholder="Last Blood DOnation Date" />
+			<input  type="text" name="prof_dolbd" placeholder="Date/Month/Year" value="{% if userprof.dolbd %}{{ userprof.dolbd|date:"d-m-Y"}} {% else %} {{userprof.prof_dolbd.value  }} {% endif %}"/>
+		<br /> {{userprof.prof_dolbd.errors.as_text}}
 		</td>
 	</tr>
 	<tr>
 		<td>City:</td>
 		<td>
-			<select name="reg_city">
-	<option>Salem</option>
-	<option>Coimbatore</option>
-	<option>Madurai</option>
-	<option>Erode</option>
+			<select name="prof_city" value="">
+	<option {% if userprof.city == 'Salem' or userprof.prof_city.value == "Salem" %}selected {% endif %}>Salem</option>
+	<option {% if userprof.city == 'Coimbatore' or userprof.prof_city.value == "Coimbatore"%}selected {% endif %}>Coimbatore</option>
+	<option  {% if userprof.city == 'Madurai' or userprof.prof_city.value == "Madurai" %}selected {% endif %} >Madurai</option>
+	<option {% if userprof.city == 'Erode' or userprof.prof_city.value == "Erode" %}selected {% endif %} >Erode</option>
 </select>
 		</td>
 	</tr>
@@ -115,6 +111,7 @@
 		</td>
 	</tr>
 </table>
+</form>
   			</div>	
   			
   			<!-- instructions -->
