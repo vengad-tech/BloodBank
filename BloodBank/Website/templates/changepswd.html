@@ -58,7 +58,7 @@
 	<td>
 		<input type="hidden" name="emailid" value="{{ emailid }}" />
 		<input type="password" name="old_pswd" placeholder="Old Password"  />
-		<br /> {{ passwordform.old_pswd.errors.as_text }}
+		<br /><span class="error"> {{ passwordform.old_pswd.errors.as_text }}</span>
 	</td>
 </tr>
 <tr>
@@ -75,7 +75,7 @@
 	</td>
 	<td>
 		<input type="password" name="cnf_new_pswd" placeholder="Retype New Password" />
-	<br /> {{ passwordform.cnf_new_pswd.errors.as_text }}
+	<br /><span class="error"> {{ passwordform.cnf_new_pswd.errors.as_text }}</span>
 	</td>
 </tr>
 	<tr>

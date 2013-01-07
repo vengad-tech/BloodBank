@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Salem Blood Bank - Home</title>
+    <!-- Bootstrap -->
+	  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+	    <link href="/static/css/custom.css" rel="stylesheet" media="screen">
+	    <!-- Jquery -->
+	    <script src="/static/js/jquery-latest.js"></script>
+	    <!-- bootstrap -->
+	    <script src="/static/js/bootstrap.min.js"></script>
+	    <!-- events -->
+	    <script src="/static/js/events.js"></script>
+  </head>
+  <body>
+  	<!-- navbar -->
+  	<div class="navbar">
+  	<div class="navbar-inner">
+    <center><a class="brand" href="#">Salem Blood Bank</a></center>
+   
+  </div>
+</div>
+
+  	<div class="container-fluid">
+  		<div class="row-fluid">
+  			<!-- login -->
+  			<div class="span4 row-fluid" >
+
+  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="/static/img/blood_load.png"/>
+  				
+  			</div>
+  			<!-- load image -->	
+  			<div class="span5" >
+  	<ul class="nav nav-pills">
+    <li class="active">
+    <a href="/home/">Home</a>
+    </li><br /><br />
+    <legend>Forgot Password?</legend>
+    <form method="post">
+     		{% csrf_token %}
+		{% if success %}
+    	<div class="alert alert-success">
+    	Password Sent to the Email , Check your Email !!
+    	</div>
+    	{% endif %}
+    	{% if error %}
+    	<div class="alert alert-error">
+    	Unable to find the Email given !!! Contact admin for help ..
+    	</div>
+    	{% endif %}
+    <table>
+	<tr>
+		<td>
+			Enter Your Email Id:
+		</td>
+		<td>
+			<input type="email" name="frgt_email" placeholder="Email Id" />
+			<br /><span class="error"> {{form.frgt_email.errors.as_text}}</span>
+
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<button type="submit" class="btn" name="frgt_btn">Send Password</button>
+		</td>
+	</tr>
+</table>
+</form>
+		</div>	
+  			
+  			<!-- instructions -->
+  			<div class="span3">
+  				{% include "rules.html" %}
+  			</div>
+  			</div> 
+  			
+  		</div>
+
+</body>

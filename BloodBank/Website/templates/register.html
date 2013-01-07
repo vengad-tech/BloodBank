@@ -4,14 +4,14 @@
  	<table>
 <tr><td>Name </td>
 	<td><input name= "reg_name" id="name" type="text" value="{{ form.reg_name.value }}" placeholder="Your Full Name" />
-		<br /> {{form.reg_name.errors.as_text}}
+		<br /><span class="error"> {{form.reg_name.errors.as_text}}</span>
 	</td></tr>
 <tr>
 	<td>
 	Email-Id	
 	</td>
 	<td><input id="reg_email" name="reg_emailid" type="text" value="{{ form.reg_emailid.value }}" placeholder="Primary Mail Address" />
-	<br />	{{ form.reg_emailid.errors.as_text }}
+	<br /><span class="error">	{{ form.reg_emailid.errors.as_text }}</span>
 	</td>
 </tr>
 <tr>
@@ -29,7 +29,7 @@
 	</td>
 	<td>
 		<input id="reg_cnfpswd" name="reg_cnfpswd" type="password" placeholder="Confirm Secret Word" />
-		<br /> {{ form.reg_cnfpswd.errors.as_text }}
+		<br /> <span class="error">{{ form.reg_cnfpswd.errors.as_text }}</span>
 	</td>
 </tr>
 <tr>
@@ -55,7 +55,7 @@
 	<option>A+</option>
 	<option>A-</option>
 </select>
-<br /> {{ form.reg_bloodgroup.errors.as_text }}
+<br /><span class="error"> {{ form.reg_bloodgroup.errors.as_text }}</span>
 	</td>
 </tr>
 <tr>
@@ -64,7 +64,7 @@
 	</td>
 	<td>
 		<input id="mob" name="reg_mobile" type="tel" placeholder="Primary Mobile Number" value="{{ form.reg_mobile.value }}" />
-		<br /> {{ form.reg_mobile.errors.as_text }}
+		<br /><span class="error"> {{ form.reg_mobile.errors.as_text }}</span>
 		 </td>
 </tr>
 <tr>
@@ -90,7 +90,7 @@
 	</td>
 	<td>
 		<input id="dob" name="reg_dob" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dob.value }}" />
-		<br /> {{ form.reg_dob.errors.as_text }}
+		<br /><span class="error"> {{ form.reg_dob.errors.as_text }}</span>
 	</td>
 </tr>
 <tr>
@@ -100,7 +100,7 @@ Last Donation Date:
 	</td>
 	<td>
 		<input name="reg_dolbd" id="dolbd" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dolbd.value }}" />
-		<br /> {{ form.reg_dolbd.errors.as_text }}
+		<br /><span class="error"> {{ form.reg_dolbd.errors.as_text }}</span>
 	</td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@ Last Donation Date:
 	<option {% if form.reg_city.value == "Madurai" %}selected{% endif %}>Madurai</option>
 	<option {% if form.reg_city.value == "Erode" %}selected{% endif %}>Erode</option>
 </select>
-{{ form.reg_city.errors.as_text }}
+<span class="error">{{ form.reg_city.errors.as_text }}</span>
 	</td>
 </tr>
 <!-- <tr>

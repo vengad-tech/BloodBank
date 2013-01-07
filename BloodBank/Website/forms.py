@@ -203,4 +203,6 @@ class PasswordForm(forms.Form):
             msg =u"Unknown Error occured,Try after some time"
             self._errors["cnf_new_pswd"] = self.error_class([msg])
         return cleaned_data
+class ForgotPassword(forms.Form):
+    frgt_email = forms.EmailField()
             

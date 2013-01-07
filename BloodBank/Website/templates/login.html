@@ -7,7 +7,7 @@
   	<tr>
   		
   	<td> Email:</td>
-    <td><input id="emailid" name="log_emailid" autofocus="yes" onfocusout="validate-email" type="text" placeholder="Email Address" value="{{ form.log_emailid.value }}">
+    <td><input id="emailid" name="log_emailid" autofocus="yes" onfocusout="validate-email" type="email" placeholder="Email Address" value="{{ form.log_emailid.value }}">
 	<br /><span class="error"> {{form.log_emailid.errors.as_text}} </span>
     	</td>
     </tr>
@@ -16,7 +16,7 @@
    <td><input id="pswd" type="password" name="log_pswd" placeholder="Password">
    	<br /> <span class="error"> {{ form.log_pswd.errors.as_text}} </span>
    </td></tr>
-<tr>   		<td></td> <td><a href="http://google.com" id="forgotpswd" name="log_forgotpswd">Forgot Password!</a>
+<tr>   		<td></td> <td><a href="/forgotpswd" id="forgotpswd" name="log_forgotpswd">Forgot Password!</a>
 
    </td>
    </tr>

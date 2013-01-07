@@ -16,6 +16,7 @@ from datetime import timedelta
 from auth import islogin
 from auth import logout
 from forms import PasswordForm
+from forms import ForgotPassword
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #from django.contrib.formtools.tests.wizard.forms import request
 def register(request):
@@ -185,3 +186,37 @@ def changepswd(request):
     
     c.update({"emailid":emailid})
     return render_to_response("changepswd.html",c)
+
+def forgotpswd(request):
+    if request.method == "POST":
+        form = ForgotPassword(request.POST)
+        if form.is_valid():
+            try:
+                emailid = form.cleaned_data["frgt_email"]
+                user = RegisteredUsers.objects.get(email=emailid)
+                if user != None :
+                    
+                    password = user.pswd
+                    #write coding to send email to the mail
+                    c={}
+                    c.update({"success":True})
+                    c.update(csrf(request))
+                    
+                else:
+                    c={}
+                    c.update(csrf(request))
+                    c.update({"error":True})
+                return render_to_response("forgotpswd.html",c)
+            except:
+                c={}
+                c.update(csrf(request))
+                c.update({"error":True})
+                return render_to_response("forgotpswd.html",c)
+        else:
+            c={}
+            c.update(csrf(request))
+            c.update({"form":form})    
+            return render_to_response('forgotpswd.html',c)
+    c={}
+    c.update(csrf(request))
+    return render_to_response('forgotpswd.html',c)

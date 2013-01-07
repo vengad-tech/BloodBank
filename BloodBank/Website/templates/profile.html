@@ -58,14 +58,14 @@
 <td>
 	<input type="hidden" name="prof_oldemail" value="{{ oldemail }}"/>
 	<input type="text" name="prof_name" placeholder="Your Full Name"  value="{% firstof userprof.prof_name.value userprof.name %}"/></td>	
-	<br /> {{userprof.prof_name.errors.as_text}}
+	<br /><span class="error"> {{userprof.prof_name.errors.as_text}}</span>
 	</tr>
 	<tr><td>
 		Emailid:
 	</td>
 	<td>
 		<input type="email" name="prof_emailid" placeholder="Primary Email Id" value="{% firstof userprof.prof_emailid.value userprof.email %}" />
-	<br /> {{userprof.prof_emailid.errors.as_text}}
+	<br /><span class="error"> {{userprof.prof_emailid.errors.as_text}}</span>
 	</td>
 	</tr>
 	
@@ -77,7 +77,7 @@
 		</td>
 		<td>
 			<input type="tel" name="prof_mobile" placeholder="Mobile" value="{% firstof userprof.prof_mobile.value userprof.mobile %}"/>
-		<br /> {{userprof.prof_mobile.errors.as_text}}
+		<br /><span class="error"> {{userprof.prof_mobile.errors.as_text}}</span>
 		</td>
 	</tr>
 
@@ -87,7 +87,7 @@
 		</td>
 		<td>
 			<input  type="text" name="prof_dolbd" placeholder="Date/Month/Year" value="{% if userprof.dolbd %}{{ userprof.dolbd|date:"d-m-Y"}} {% else %} {{userprof.prof_dolbd.value  }} {% endif %}"/>
-		<br /> {{userprof.prof_dolbd.errors.as_text}}
+		<br /><span class="error"> {{userprof.prof_dolbd.errors.as_text}}</span>
 		</td>
 	</tr>
 	<tr>

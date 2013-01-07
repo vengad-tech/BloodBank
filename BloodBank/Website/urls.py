@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     url(r'search','Website.views.search'),
     url(r'profile','Website.views.profile'),    
     url(r'changepswd','Website.views.changepswd'),    
+    url(r'forgotpswd','Website.views.forgotpswd'),    
 
 )
