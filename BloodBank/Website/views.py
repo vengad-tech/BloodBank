@@ -7,6 +7,7 @@ from forms import RegisterForm
 from forms import LoginForm
 from forms import SearchForm
 from forms import ProfileForm
+from email import sendpassword
 from django.core.context_processors import csrf
 from models import RegisteredUsers
 from django.shortcuts import render
@@ -173,7 +174,7 @@ def changepswd(request):
                 c.update({"updated":True})
                 return render_to_response("changepswd.html",c)
             except:
-                return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
+                return HttpResponse("Error in Connection with Database , Try again ")
         else:
             c={}
             c.update(csrf(request))
@@ -195,9 +196,11 @@ def forgotpswd(request):
                 emailid = form.cleaned_data["frgt_email"]
                 user = RegisteredUsers.objects.get(email=emailid)
                 if user != None :
-                    
+                    name=user.name
                     password = user.pswd
+                    email = user.email
                     #write coding to send email to the mail
+                    sendpassword(name,email,password)
                     c={}
                     c.update({"success":True})
                     c.update(csrf(request))
