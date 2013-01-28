@@ -18,7 +18,11 @@ from auth import islogin
 from auth import logout
 from forms import PasswordForm
 from forms import ForgotPassword
+from models import Feedback
+from forms import ContactForm
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+#from django.contrib.formtools.tests.wizard.forms import request
 #from django.contrib.formtools.tests.wizard.forms import request
 def register(request):
     if request.method == 'POST': # If the form has been submitted...
@@ -50,7 +54,7 @@ def register(request):
             c.update({"form":form})
             c.update({"test":"testing"})
             c.update({"reg":True})
-            #return HttpResponse("validation failed because "+str(c))
+            #r-turn HttpResponse("validation failed because "+str(c))
             return render_to_response('index.html',c)
     c = {}
     c.update({"reg":True})
@@ -79,10 +83,11 @@ def home(request):
     return render_to_response('index.html',c)
 
 def search(request):
-    
     if islogin(request):
         city = request.GET.get("srch_city")
         bloodgroup = request.GET.get("srch_bloodgroup")
+#        age = None
+        age = datetime.date.today()
         page = request.GET.get("page")
         if page == None:
             page = 1
@@ -90,12 +95,20 @@ def search(request):
         if city != None and bloodgroup != None:
             today = datetime.date.today()
             three_months = timedelta(days=90)
-            results = RegisteredUsers.objects.filter(city=city,bloodgroup=bloodgroup).exclude(dolbd__gt=(today-three_months))
-            paginator = Paginator(results, 10)
+            eighteen_years = timedelta(days=6570)
+            results = RegisteredUsers.objects.filter(city=city,bloodgroup=bloodgroup).exclude(dolbd__gt=(today-three_months)).exclude(dob__gt=(today-eighteen_years))
+#            results = RegisteredUsers.objects.get(city=city,bloodgroup=bloodgroup).exclude(dolbd__gt=(today-three_months))
+#            age = today - age
+#            age = today - results.dob
+            for res in results:
+                dt = today  - res.dob
+                res.age = dt.days / 365 
+            paginator = Paginator(results, 5)
             name = request.session.get("name",None)
             c={}
             c.update({"user":name})
             c.update({"city":city,"bloodgroup":bloodgroup})
+            c.update({"age":age})
             try:
                 results = paginator.page(page)
             except PageNotAnInteger:
@@ -113,6 +126,7 @@ def search(request):
         return render_to_response('search.html',c)
     else:
         return HttpResponseRedirect("/home")
+
 def logoutsite(request):
     logout(request)
     return HttpResponseRedirect('/home')
@@ -223,3 +237,40 @@ def forgotpswd(request):
     c={}
     c.update(csrf(request))
     return render_to_response('forgotpswd.html',c)
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            feedback = Feedback()
+            try:
+                feedback.name = form.cleaned_data["con_name"]
+                feedback.email = form.cleaned_data["con_emailid"]
+                feedback.mobile = form.cleaned_data["con_mobile"]
+                feedback.value = form.cleaned_data["con_text"]
+                feedback.save()
+            except:
+                return HttpResponse('Error in sending feedback'+str(vars(feedback)))
+            c={}
+            c.update(csrf(request))
+            return render_to_response('contact.html',c)
+        else:
+            c={}
+            c.update({"form":form})
+            c.update(csrf(request))
+            return render_to_response('contact.html',c)
+    c={}
+    c.update(csrf(request))
+    return render_to_response('contact.html',c)
+
+def terms(request):
+    return render_to_response("terms.html")
+
+def siteby(request):
+    return render_to_response('siteby.html')
+
+def reportinactivity(request):
+    return render_to_response('reportuser.html')
+
+def healthtips(request):
+    return render_to_response('healthtips.html')

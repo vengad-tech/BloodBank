@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <title>Drop For Life - Home</title>
-	  	<!-- Bootstrap -->
-	  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
 	    <link href="/static/css/custom.css" rel="stylesheet" media="screen">
@@ -15,12 +15,6 @@
 	    <script src="/static/js/events.js"></script>
   </head>
   <body>
-
-<!-- //*********facebook like send button -->
-
-
-
-
   	<!-- navbar -->
   	<div class="navbar">
   	<div class="navbar-inner">
@@ -28,47 +22,73 @@
    
   </div>
 </div>
-
   	<div class="container-fluid">
   		<div class="row-fluid">
   			<!-- login -->
   			<div class="span4 row-fluid" >
 
-
 			<span class="hidden-phone">
 			  	{% include "fb-likebutton.html" %}				
 			</span>
-			<span class="visible-mobile hidden-desktop hidden-tablet">
+			<span class="visible-mobile">
 				{% include "fb-likebutton-mobile.html" %}
 			</span>
 
 
-<!--facebook like send button 
-<div class="fb-like" data-href="http://www.lakshmignarayanan.com" data-send="true" data-width="450" data-show-faces="true"></div>
--->
-<!--
-//********** twitter feeds 
-<a class="twitter-timeline" href="https://twitter.com/lakshmignarayan" data-widget-id="289806901527580673">Tweets by @lakshmignarayan</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
--->
 <!--  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="/static/img/blood_load.png"/> -->
   				
   			</div>
   			<!-- load image -->	
   			<div class="span5" >
-  	<ul class="nav nav-pills">
-    <li class="active">
-    <a href="/home/">Home</a>
-    </li>
-    
-    <!-- <li><a href="/profile/">Profile</a></li> -->
-    </ul>
-  				{% if reg %}
-  				{% include "register.html" %} 
-  				{% else %}
-  				{% include "login.html" %}
-  				{% endif %}
-  			</div>	
+
+<form method="post" action="/contact/">
+		{% csrf_token %}
+
+<legend>Contact Form</legend>
+<table>
+	<tr>
+		<td>Name:</td>
+		<td>
+<input type="text" name="con_name" placeholder="Your Full Name" autofocus="yes"  />
+		<br /><span class="error"> {{form.con_name.errors.as_text}}</span>
+
+			
+		</td>
+		
+	</tr>
+	<tr>
+		<td>Email Id(Optional):</td>
+		<td>
+<input type="email" name="con_emailid" placeholder="Primary Email Id" />
+		<br /><span class="error"> {{form.con_emailid.errors.as_text}}</span>			
+		</td>
+	</tr>
+	<tr>
+		<td>Mobile No.:(Optional):</td>
+		<td>
+<input type="tel" name="con_mobile" placeholder="Mobile Number" />
+		<br /><span class="error"> {{form.con_mobile.errors.as_text}}</span>			
+		</td>
+	</tr>
+	<tr>
+		<td>Write to us:</td>
+		<td>
+<textarea name="con_text" placeholder="Suggestions/Complaints" ></textarea>
+			
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+<button class="btn" type="submit" name="con_submit">Submit</button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/home" class="btn">Cancel</a>
+			
+		</td>
+	</tr>
+</table>
+</form>
+		</div>	
   			
   			<!-- instructions -->
   			<div class="span3">
@@ -77,7 +97,8 @@
   			</div> 
   			
   		</div>
-  </body>
+
+</body>
   <footer>
   <!-- <div class="navbar"> -->
   <div class="navbar-inner">

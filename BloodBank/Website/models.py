@@ -1,4 +1,5 @@
 from django.db import models
+#from django.core.management.validation import max_length
 
 
 # Create your models here.
@@ -14,3 +15,8 @@ class RegisteredUsers(models.Model):
     city = models.CharField(max_length=20)
     hidemob = models.CharField(max_length=3)
     
+class Feedback(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    mobile = models.IntegerField(max_length=10)
+    value = models.TextField(max_length=300)

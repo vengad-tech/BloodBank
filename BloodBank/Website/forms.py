@@ -4,6 +4,34 @@ import datetime
 from datetime import timedelta
 import re
 from models import RegisteredUsers
+from models import Feedback
+
+class ContactForm(forms.Form):
+    con_name=forms.CharField(30,3)
+    con_emailid=forms.EmailField(required=False)
+    con_mobile=forms.IntegerField(required=False)
+    con_text=forms.CharField(300,3)
+    def clean(self):
+        cleaned_data = super(ContactForm, self).clean()
+        con_name=cleaned_data.get("con_name")
+        con_emailid=cleaned_data.get("con_emailid")
+        con_mobile=cleaned_data.get("con_mobile")
+        con_text=cleaned_data.get("con_text")
+        try:
+            if re.match(r'^[A-Za-z. ]*$', con_name) is None:
+                msg = u"Invalid Characters in Name"
+                self._errors["con_name"] = self.error_class([msg])
+        except:
+            pass
+        try:
+            if con_mobile != None and (con_mobile < 7000000000 or con_mobile > 9999999999):
+                msg = u"Invalid Mobile Number"
+                self._errors["con_mobile"] = self.error_class([msg])
+        except:
+            pass
+        
+        return cleaned_data
+    
 class ProfileForm(forms.Form):
     prof_oldemail=forms.EmailField()
     prof_name = forms.CharField(30,3)
@@ -23,8 +51,8 @@ class ProfileForm(forms.Form):
         #18 yrs minimum to donate blood
         year = timedelta(days=365*18)
         try:
-            if prof_dob > today - year :
-                msg = u"Must be 18 years or Older "
+            if prof_dob > today :
+                msg = u"Must be 1 day or Older "
                 self._errors["prof_dob"] = self.error_class([msg])
         except:
             pass
@@ -41,7 +69,7 @@ class ProfileForm(forms.Form):
         except:
             pass
         try:
-            if re.match(r'^[a-zA-Z.]*$', prof_name) is None:
+            if re.match(r'^[A-Za-z. ]*$', prof_name) is None:
                 msg = u"Invalid Characters in Name "
                 self._errors["prof_name"] = self.error_class([msg])
         except:
@@ -76,7 +104,7 @@ class RegisterForm(forms.Form):
     reg_hidemob = forms.CharField(required=False)
     reg_sex = forms.CharField(6,4)
     reg_dob = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
-    reg_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    reg_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,required=False)
     reg_city = forms.CharField(20,3)
     def clean(self):
         
@@ -92,13 +120,13 @@ class RegisterForm(forms.Form):
         #18 yrs minimum to donate blood
         year = timedelta(days=365*18)
         try:
-            if reg_dob > today - year :
-                msg = u"Must be 18 years or Older "
+            if reg_dob > today :
+                msg = u"Must be 1 day or Older "
                 self._errors["reg_dob"] = self.error_class([msg])
         except:
             pass
         try:
-            if  reg_dolbd > today :
+            if  reg_dolbd != None and (reg_dolbd > today or reg_dolbd < reg_dob + year):
                 msg = u"Enter a Resonable Date "
                 self._errors["reg_dolbd"] = self.error_class([msg])
         except:
@@ -110,7 +138,7 @@ class RegisterForm(forms.Form):
         except:
             pass
         try:
-            if re.match(r'^[a-zA-Z.]*$', reg_name) is None:
+            if re.match(r'^[a-zA-Z. ]*$', reg_name) is None:
                 msg = u"Invalid Characters in Name "
                 self._errors["reg_name"] = self.error_class([msg])
         except:

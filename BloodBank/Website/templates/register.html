@@ -37,23 +37,23 @@
 		Blood Group
 	</td>
 	<td>
-		<select name="reg_bloodgroup" value="{{ form.reg_bloodgroup.as_text }}">
-	<option>A1+</option>
-	<option>A1-</option>
-	<option>A2+</option>
-	<option>A2-</option>
-	<option>B+</option>
-	<option>B-</option>
-	<option>A1B+</option>
-	<option>A1B-</option>
-	<option>A2B+</option>
-	<option>A2B-</option>
-	<option>AB+</option>
-	<option>AB-</option>
-	<option>O+</option>
-	<option>O-</option>
-	<option>A+</option>
-	<option>A-</option>
+<select name="reg_bloodgroup" value="{{ form.reg_bloodgroup.as_text }}">
+	<option {% if form.reg_bloodgroup.value = "A1+" %}selected="True" {% endif %}>A1+</option>
+	<option {% if form.reg_bloodgroup.value = "A1-" %}selected="True" {% endif %}>A1-</option>
+	<option {% if form.reg_bloodgroup.value = "A2+" %}selected="True" {% endif %}>A2+</option>
+	<option {% if form.reg_bloodgroup.value = "A2-" %}selected="True" {% endif %}>A2-</option>
+	<option {% if form.reg_bloodgroup.value = "B+" %}selected="True" {% endif %}>B+</option>
+	<option {% if form.reg_bloodgroup.value = "B-" %}selected="True" {% endif %}>B-</option>
+	<option {% if form.reg_bloodgroup.value = "A1B+" %}selected="True" {% endif %}>A1B+</option>
+	<option {% if form.reg_bloodgroup.value = "A1B-" %}selected="True" {% endif %}>A1B-</option>
+	<option {% if form.reg_bloodgroup.value = "A2B+" %}selected="True" {% endif %}>A2B+</option>
+	<option {% if form.reg_bloodgroup.value = "A2B-" %}selected="True" {% endif %}>A2B-</option>
+	<option {% if form.reg_bloodgroup.value = "AB+" %}selected="True" {% endif %}>AB+</option>
+	<option {% if form.reg_bloodgroup.value = "AB-" %}selected="True" {% endif %}>AB-</option>
+	<option {% if form.reg_bloodgroup.value = "O+" %}selected="True" {% endif %}>O+</option>
+	<option {% if form.reg_bloodgroup.value = "O-" %}selected="True" {% endif %}>O-</option>
+	<option {% if form.reg_bloodgroup.value = "A+" %}selected="True" {% endif %}>A+</option>
+	<option {% if form.reg_bloodgroup.value = "A-" %}selected="True" {% endif %}>A-</option>
 </select>
 <br /><span class="error"> {{ form.reg_bloodgroup.errors.as_text }}</span>
 	</td>
@@ -109,11 +109,39 @@ Last Donation Date:
 	</td>
 	<td>
 		<select name="reg_city">
-	<option {% if form.reg_city.value == "Salem" %}selected{% endif %}>Salem</option>
-	<option {% if form.reg_city.value == "Coimbatore" %}selected{% endif %}>Coimbatore</option>
-	<option {% if form.reg_city.value == "Madurai" %}selected{% endif %}>Madurai</option>
-	<option {% if form.reg_city.value == "Erode" %}selected{% endif %}>Erode</option>
-</select>
+				<option {% if form.reg_city.value = "Ariyalur" %}selected="True" {% endif %}>Ariyalur</option>
+				<option {% if form.reg_city.value = "Chennai" %}selected="True" {% endif %}>Chennai</option>
+				<option {% if form.reg_city.value = "Coimbatore" %}selected="True" {% endif %}>Coimbatore</option>
+				<option {% if form.reg_city.value = "Cuddalore" %}selected="True" {% endif %}>Cuddalore</option>
+				<option {% if form.reg_city.value = "Dharmapuri" %}selected="True" {% endif %}>Dharmapuri</option>
+				<option {% if form.reg_city.value = "Dindigul" %}selected="True" {% endif %}>Dindigul</option>
+				<option {% if form.reg_city.value = "Erode" %}selected="True" {% endif %}>Erode</option>
+				<option {% if form.reg_city.value = "Kanchipuram" %}selected="True" {% endif %}>Kanchipuram</option>
+				<option {% if form.reg_city.value = "Kanniyakumari" %}selected="True" {% endif %}>Kanniyakumari</option>
+				<option {% if form.reg_city.value = "Karur" %}selected="True" {% endif %}>Karur</option>
+				<option {% if form.reg_city.value = "Krishnagiri" %}selected="True" {% endif %}>Krishnagiri</option>
+				<option {% if form.reg_city.value = "Madurai" %}selected="True" {% endif %}>Madurai</option>
+				<option {% if form.reg_city.value = "Nagapattinam" %}selected="True" {% endif %}>Nagapattinam</option>
+				<option {% if form.reg_city.value = "Namakkal" %}selected="True" {% endif %}>Namakkal</option>
+				<option {% if form.reg_city.value = "Nilgiris" %}selected="True" {% endif %}>Nilgiris</option>
+				<option {% if form.reg_city.value = "Perambalur" %}selected="True" {% endif %}>Perambalur</option>
+				<option {% if form.reg_city.value = "Pudukottai" %}selected="True" {% endif %}>Pudukottai</option>
+				<option {% if form.reg_city.value = "Ramanathapuram" %}selected="True" {% endif %}>Ramanathapuram</option>
+				<option {% if form.reg_city.value = "Salem" %}selected="True" {% endif %}>Salem</option>
+				<option {% if form.reg_city.value = "Sivaganga" %}selected="True" {% endif %}>Sivaganga</option>
+				<option {% if form.reg_city.value = "Thanjavur" %}selected="True" {% endif %}>Thanjavur</option>
+				<option {% if form.reg_city.value = "Theni" %}selected="True" {% endif %}>Theni</option>
+				<option {% if form.reg_city.value = "Thoothukudi" %}selected="True" {% endif %}>Thoothukudi</option>
+				<option {% if form.reg_city.value = "Thiruvarur" %}selected="True" {% endif %}>Thiruvarur</option>
+				<option {% if form.reg_city.value = "Tirunelveli" %}selected="True" {% endif %}>Tirunelveli</option>
+				<option {% if form.reg_city.value = "Tiruchirappalli" %}selected="True" {% endif %}>Tiruchirappalli</option>
+				<option {% if form.reg_city.value = "Thiruvallur" %}selected="True" {% endif %}>Thiruvallur</option>
+				<option {% if form.reg_city.value = "Tiruppur" %}selected="True" {% endif %}>Tiruppur</option>
+				<option {% if form.reg_city.value = "Tiruvannamalai" %}selected="True" {% endif %}>Tiruvannamalai</option>
+				<option {% if form.reg_city.value = "Vellore" %}selected="True" {% endif %}>Vellore</option>
+				<option {% if form.reg_city.value = "Villupuram" %}selected="True" {% endif %}>Villupuram</option>
+				<option {% if form.reg_city.value = "Virudhunagar" %}selected="True" {% endif %}>Virudhunagar</option>
+		</select>
 <span class="error">{{ form.reg_city.errors.as_text }}</span>
 	</td>
 </tr>
@@ -135,6 +163,7 @@ Last Donation Date:
 	<td></td>
 	<td>
 		<button class="btn" type="submit" id="btn_reg_submit">Submit</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;
 		<button class="btn" id="btn_reg_reset" type="reset">Reset</button>
 	</td>
 </tr>

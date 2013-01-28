@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Salem Blood Bank - Search</title>
+    <title>Drop For Life - Search</title>
 	  	<!-- Bootstrap -->
 	  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -18,7 +18,7 @@
   	<!-- navbar -->
   	<div class="navbar">
   	<div class="navbar-inner">
-    <center><a class="brand" href="#">Salem Blood Bank</a></center>
+    <center><a class="brand" href="home">Drop For Life</a></center>
    
   </div>
 </div>
@@ -27,8 +27,17 @@
   		<div class="row-fluid">
   			<!-- login -->
   			<div class="span4 row-fluid" >
+
+			<span class="hidden-phone">
+			  	{% include "fb-likebutton.html" %}				
+			</span>
+			<span class="visible-mobile">
+				{% include "fb-likebutton-mobile.html" %}
+			</span>
+
+<!--
   	  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="/static/img/blood_load.png"/>
-  				
+  	-->			
   			</div>
   			
   			<div class="span5" >
@@ -72,12 +81,39 @@
 	<tr>
 		<td>City:</td>
 		<td>
-			<select id="srch_city" name="srch_city">
-				<option>Salem</option>
-				<option>Coimbatore</option>
-				<option>Madurai</option>
-				<option>Erode</option>
+			<select name="srch_city">
+				<option>Ariyalur</option>
 				<option>Chennai</option>
+				<option>Coimbatore</option>
+				<option>Cuddalore</option>
+				<option>Dharmapuri</option>
+				<option>Dindigul</option>
+				<option>Erode</option>
+				<option>Kanchipuram</option>
+				<option>Kanniyakumari</option>
+				<option>Karur</option>
+				<option>Krishnagiri</option>
+				<option>Madurai</option>
+				<option>Nagapattinam</option>
+				<option>Namakkal</option>
+				<option>Nilgiris</option>
+				<option>Perambalur</option>
+				<option>Pudukottai</option>
+				<option>Ramanathapuram</option>
+				<option>Salem</option>
+				<option>Sivaganga</option>
+				<option>Thanjavur</option>
+				<option>Theni</option>
+				<option>Thoothukudi</option>
+				<option>Thiruvarur</option>
+				<option>Tirunelveli</option>
+				<option>Tiruchirappalli</option>
+				<option>Thiruvallur</option>
+				<option>Tiruppur</option>
+				<option>Tiruvannamalai</option>
+				<option>Vellore</option>
+				<option>Villupuram</option>
+				<option {% if form.srch_city.value = "Virudhunagar" %}selected="True" {% endif %}>Virudhunagar</option>
 			</select>
 		</td>
 		
@@ -114,11 +150,22 @@
 {% endif %}
 <table class="table table-hover">
 	 {% if results != None %}
+		
+			<tr>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Email Id</th>
+			<th>Mobile</th>
+			</tr>
+		
 	{% for user in results %}
 	<tr>
+
 		<td>{{ user.name }}</td>
+		<td>{{ user.age }}</td>
 		<td>{{ user.email }}</td>
 		<td>{{ user.mobile }}</td>
+		<td><a href="/reportuser">Report Inactivity</a></td>
 		
 	</tr>
 	{% empty %}
@@ -142,7 +189,7 @@
   <footer>
   <!-- <div class="navbar"> -->
   <div class="navbar-inner">
-    <center>© Youth Red Cross, Sona College</center>
+    <center>© 2012-2013 dropforlife.in All rights reserved. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/terms">Terms & Privacy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/siteby">Site design</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/contact">Contact Us</a></center>
   </div>
  <!-- </div> -->
   </footer>
