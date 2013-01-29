@@ -67,13 +67,7 @@
 		<br /><span class="error"> {{ form.reg_mobile.errors.as_text }}</span>
 		 </td>
 </tr>
-<tr>
-	<td></td>
-	<td>
-		<input id="hidemob" name="reg_hidemob" type="checkbox" />
-		 Hide Contact Numbers
-	</td>
-</tr>
+
 <tr>
 	<td>
 <br />		Sex
@@ -100,7 +94,9 @@ Last Donation Date:
 	</td>
 	<td>
 		<input name="reg_dolbd" id="dolbd" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dolbd.value }}" />
+		<br />* Leave blank if not donated yet..!
 		<br /><span class="error"> {{ form.reg_dolbd.errors.as_text }}</span>
+
 	</td>
 </tr>
 <tr>

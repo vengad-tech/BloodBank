@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <title>Drop For Life - Search</title>
+        <link href='http://fonts.googleapis.com/css?family=Domine' rel='stylesheet' type='text/css'>
+
 	  	<!-- Bootstrap -->
 	  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -27,13 +29,18 @@
   		<div class="row-fluid">
   			<!-- login -->
   			<div class="span4 row-fluid" >
+<div class="span9"><b style="font-family: 'Domine', serif;">"Blood cannot be manufactured, it can come only as a gift from a fellow human's generosity."</b></div>
+<br /><br /><br /><br />
+
+<!-- facebook plugin -->
 
 			<span class="hidden-phone">
 			  	{% include "fb-likebutton.html" %}				
 			</span>
-			<span class="visible-mobile">
+			<span class="visible-mobile hidden-desktop hidden-tablet">
 				{% include "fb-likebutton-mobile.html" %}
 			</span>
+
 
 <!--
   	  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="/static/img/blood_load.png"/>
@@ -59,22 +66,22 @@
 		</td>
 		<td>
 			<select name="srch_bloodgroup">
-	<option>A1+</option>
-	<option>A1-</option>
-	<option>A2+</option>
-	<option>A2-</option>
-	<option>B+</option>
-	<option>B-</option>
-	<option>A1B+</option>
-	<option>A1B-</option>
-	<option>A2B+</option>
-	<option>A2B-</option>
-	<option>AB+</option>
-	<option>AB-</option>
-	<option>O+</option>
-	<option>O-</option>
-	<option>A+</option>
-	<option>A-</option>
+	<option {% if bloodgroup = "A1+" %}selected="True" {% endif %}>A1+</option>
+	<option {% if bloodgroup = "A1-" %}selected="True" {% endif %}>A1-</option>
+	<option {% if bloodgroup = "A2+" %}selected="True" {% endif %}>A2+</option>
+	<option {% if bloodgroup = "A2-" %}selected="True" {% endif %}>A2-</option>
+	<option {% if bloodgroup = "B+" %}selected="True" {% endif %}>B+</option>
+	<option {% if bloodgroup = "B-" %}selected="True" {% endif %}>B-</option>
+	<option {% if bloodgroup = "A1B+" %}selected="True" {% endif %}>A1B+</option>
+	<option {% if bloodgroup = "A1B-" %}selected="True" {% endif %}>A1B-</option>
+	<option {% if bloodgroup = "A2B+" %}selected="True" {% endif %}>A2B+</option>
+	<option {% if bloodgroup = "A2B-" %}selected="True" {% endif %}>A2B-</option>
+	<option {% if bloodgroup = "AB+" %}selected="True" {% endif %}>AB+</option>
+	<option {% if bloodgroup = "AB-" %}selected="True" {% endif %}>AB-</option>
+	<option {% if bloodgroup = "O+" %}selected="True" {% endif %}>O+</option>
+	<option {% if bloodgroup = "O-" %}selected="True" {% endif %}>O-</option>
+	<option {% if bloodgroup = "A+" %}selected="True" {% endif %}>A+</option>
+	<option {% if bloodgroup = "A-" %}selected="True" {% endif %}>A-</option>
 </select>
 		</td>
 	</tr>
@@ -82,38 +89,38 @@
 		<td>City:</td>
 		<td>
 			<select name="srch_city">
-				<option>Ariyalur</option>
-				<option>Chennai</option>
-				<option>Coimbatore</option>
-				<option>Cuddalore</option>
-				<option>Dharmapuri</option>
-				<option>Dindigul</option>
-				<option>Erode</option>
-				<option>Kanchipuram</option>
-				<option>Kanniyakumari</option>
-				<option>Karur</option>
-				<option>Krishnagiri</option>
-				<option>Madurai</option>
-				<option>Nagapattinam</option>
-				<option>Namakkal</option>
-				<option>Nilgiris</option>
-				<option>Perambalur</option>
-				<option>Pudukottai</option>
-				<option>Ramanathapuram</option>
-				<option>Salem</option>
-				<option>Sivaganga</option>
-				<option>Thanjavur</option>
-				<option>Theni</option>
-				<option>Thoothukudi</option>
-				<option>Thiruvarur</option>
-				<option>Tirunelveli</option>
-				<option>Tiruchirappalli</option>
-				<option>Thiruvallur</option>
-				<option>Tiruppur</option>
-				<option>Tiruvannamalai</option>
-				<option>Vellore</option>
-				<option>Villupuram</option>
-				<option {% if form.srch_city.value = "Virudhunagar" %}selected="True" {% endif %}>Virudhunagar</option>
+				<option {% if city = "Ariyalur" %}selected="True" {% endif %}>Ariyalur</option>
+				<option {% if city = "Chennai" %}selected="True" {% endif %}>Chennai</option>
+				<option {% if city = "Coimbatore" %}selected="True" {% endif %}>Coimbatore</option>
+				<option {% if city = "Cuddalore" %}selected="True" {% endif %}>Cuddalore</option>
+				<option {% if city = "Dharmapuri" %}selected="True" {% endif %}>Dharmapuri</option>
+				<option {% if city = "Dindigul" %}selected="True" {% endif %}>Dindigul</option>
+				<option {% if city = "Erode" %}selected="True" {% endif %}>Erode</option>
+				<option {% if city = "Kanchipuram" %}selected="True" {% endif %}>Kanchipuram</option>
+				<option {% if city = "Kanniyakumari" %}selected="True" {% endif %}>Kanniyakumari</option>
+				<option {% if city = "Karur" %}selected="True" {% endif %}>Karur</option>
+				<option {% if city = "Krishnagiri" %}selected="True" {% endif %}>Krishnagiri</option>
+				<option {% if city = "Madurai" %}selected="True" {% endif %}>Madurai</option>
+				<option {% if city = "Nagapattinam" %}selected="True" {% endif %}>Nagapattinam</option>
+				<option {% if city = "Namakkal" %}selected="True" {% endif %}>Namakkal</option>
+				<option {% if city = "Nilgiris" %}selected="True" {% endif %}>Nilgiris</option>
+				<option {% if city = "Perambalur" %}selected="True" {% endif %}>Perambalur</option>
+				<option {% if city = "Pudukottai" %}selected="True" {% endif %}>Pudukottai</option>
+				<option {% if city = "Ramanathapuram" %}selected="True" {% endif %}>Ramanathapuram</option>
+				<option {% if city = "Salem" %}selected="True" {% endif %}>Salem</option>
+				<option {% if city = "Sivaganga" %}selected="True" {% endif %}>Sivaganga</option>
+				<option {% if city = "Thanjavur" %}selected="True" {% endif %}>Thanjavur</option>
+				<option {% if city = "Theni" %}selected="True" {% endif %}>Theni</option>
+				<option {% if city = "Thoothukudi" %}selected="True" {% endif %}>Thoothukudi</option>
+				<option {% if city = "Thiruvarur" %}selected="True" {% endif %}>Thiruvarur</option>
+				<option {% if city = "Tirunelveli" %}selected="True" {% endif %}>Tirunelveli</option>
+				<option {% if city = "Tiruchirappalli" %}selected="True" {% endif %}>Tiruchirappalli</option>
+				<option {% if city = "Thiruvallur" %}selected="True" {% endif %}>Thiruvallur</option>
+				<option {% if city = "Tiruppur" %}selected="True" {% endif %}>Tiruppur</option>
+				<option {% if city = "Tiruvannamalai" %}selected="True" {% endif %}>Tiruvannamalai</option>
+				<option {% if city = "Vellore" %}selected="True" {% endif %}>Vellore</option>
+				<option {% if city = "Villupuram" %}selected="True" {% endif %}>Villupuram</option>
+				<option {% if city = "Virudhunagar" %}selected="True" {% endif %}>Virudhunagar</option>
 			</select>
 		</td>
 		

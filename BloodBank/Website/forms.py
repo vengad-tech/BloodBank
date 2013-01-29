@@ -37,13 +37,14 @@ class ProfileForm(forms.Form):
     prof_name = forms.CharField(30,3)
     prof_emailid = forms.EmailField()
     prof_mobile = forms.IntegerField()
-    prof_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    prof_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,required=False)
     prof_city = forms.CharField(20,3)
     def clean(self):
         cleaned_data = super(ProfileForm, self).clean()
         prof_emailid = cleaned_data.get("prof_emailid")
         prof_oldemail = cleaned_data.get("prof_oldemail")
         prof_dob = cleaned_data.get("prof_dob")
+        
         prof_dolbd = cleaned_data.get("prof_dolbd")
         today = datetime.date.today()
         prof_mobile = cleaned_data.get("prof_mobile")
@@ -57,9 +58,11 @@ class ProfileForm(forms.Form):
         except:
             pass
         try:
-            if  prof_dolbd > today :
+            if  prof_dolbd !=None and prof_dolbd > today :
                 msg = u"Enter a Resonable Date "
                 self._errors["prof_dolbd"] = self.error_class([msg])
+            else:
+                self._errors["prof_dolbd"]
         except:
             pass
         try:

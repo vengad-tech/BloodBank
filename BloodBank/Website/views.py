@@ -20,7 +20,7 @@ from forms import PasswordForm
 from forms import ForgotPassword
 from models import Feedback
 from forms import ContactForm
-
+import sys
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #from django.contrib.formtools.tests.wizard.forms import request
 #from django.contrib.formtools.tests.wizard.forms import request
@@ -39,12 +39,15 @@ def register(request):
                 user.bloodgroup = form.cleaned_data["reg_bloodgroup"]
                 user.dob = form.cleaned_data["reg_dob"]
                 user.dolbd = form.cleaned_data["reg_dolbd"]
+                #if user.dolbd is None:
+                #    user.dolbd = "1991-01-01"
                 user.sex = form.cleaned_data["reg_sex"]
                 user.mobile = form.cleaned_data["reg_mobile"]
                 user.hidemob = form.cleaned_data["reg_hidemob"]
                 user.city = form.cleaned_data["reg_city"]
                 user.save()
             except:
+                print sys.exc_info()[1]
                 return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
             return render_to_response("login_redirect.html",{})
             #return HttpResponseRedirect('/registered/') # Redirect after POST
@@ -240,18 +243,26 @@ def forgotpswd(request):
 
 def contact(request):
     if request.method == 'POST':
+        c={}
         form = ContactForm(request.POST)
         if form.is_valid():
             feedback = Feedback()
             try:
                 feedback.name = form.cleaned_data["con_name"]
                 feedback.email = form.cleaned_data["con_emailid"]
-                feedback.mobile = form.cleaned_data["con_mobile"]
+                try:
+                    feedback.mobile = form.cleaned_data["con_mobile"]
+                except:
+                    feedback.mobile = 0
+                #if feedback.mobile is None:
+                #    feedback.mobile = 0
                 feedback.value = form.cleaned_data["con_text"]
                 feedback.save()
+                c.update({"success":True})
             except:
-                return HttpResponse('Error in sending feedback'+str(vars(feedback)))
-            c={}
+                print sys.exc_info()[1]
+                return HttpResponse('Error in sending feedback'+str(vars(feedback))+str(sys.exc_info()[0]))
+            
             c.update(csrf(request))
             return render_to_response('contact.html',c)
         else:
@@ -270,7 +281,7 @@ def siteby(request):
     return render_to_response('siteby.html')
 
 def reportinactivity(request):
-    return render_to_response('reportuser.html')
+    return render_to_response('reportuser_redirect.html')
 
 def healthtips(request):
     return render_to_response('healthtips.html')
