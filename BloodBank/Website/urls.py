@@ -17,7 +17,6 @@ urlpatterns = patterns('',
     url(r'register','Website.views.register'),
     url(r'logoutsite','Website.views.logoutsite'),
     url(r'home','Website.views.home'),
-#    url(r'','Website.views.home'),
     url(r'search','Website.views.search'),
     url(r'profile','Website.views.profile'),    
     url(r'changepswd','Website.views.changepswd'),    
@@ -26,6 +25,6 @@ urlpatterns = patterns('',
     url(r'siteby','Website.views.siteby'),    
     url(r'contact','Website.views.contact'),    
     url(r'reportuser','Website.views.reportinactivity'),
-    url(r'healthtips','Website.views.healthtips')
-
+    url(r'healthtips','Website.views.healthtips'),
+    url(r'','Website.views.home')
 )

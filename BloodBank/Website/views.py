@@ -1,5 +1,6 @@
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirectBase
+from django.http import HttpResponse
+#from django.http import HttpResponse, HttpResponseRedirectBase
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
@@ -42,7 +43,7 @@ def register(request):
                 #if user.dolbd is None:
                 #    user.dolbd = "1991-01-01"
                 user.sex = form.cleaned_data["reg_sex"]
-                user.mobile = form.cleaned_data["reg_mobile"]
+                user.mobile = str(form.cleaned_data["reg_mobile"])
                 user.hidemob = form.cleaned_data["reg_hidemob"]
                 user.city = form.cleaned_data["reg_city"]
                 user.save()
@@ -143,7 +144,7 @@ def profile(request):
                     user.email = form.cleaned_data["prof_emailid"]
                     user.name = form.cleaned_data["prof_name"]
                     user.dolbd = form.cleaned_data["prof_dolbd"]
-                    user.mobile = form.cleaned_data["prof_mobile"]
+                    user.mobile = str(form.cleaned_data["prof_mobile"])
                     user.city = form.cleaned_data["prof_city"]
                     user.save()
                 except:
@@ -251,9 +252,9 @@ def contact(request):
                 feedback.name = form.cleaned_data["con_name"]
                 feedback.email = form.cleaned_data["con_emailid"]
                 try:
-                    feedback.mobile = form.cleaned_data["con_mobile"]
+                    feedback.mobile = str(form.cleaned_data["con_mobile"])
                 except:
-                    feedback.mobile = 0
+                    feedback.mobile = ""
                 #if feedback.mobile is None:
                 #    feedback.mobile = 0
                 feedback.value = form.cleaned_data["con_text"]
