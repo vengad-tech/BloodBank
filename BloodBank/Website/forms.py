@@ -9,8 +9,8 @@ from models import Feedback
 class ContactForm(forms.Form):
     con_name=forms.CharField(30,3)
     con_emailid=forms.EmailField(required=False)
-    con_mobile = forms.CharField(required=False)
-    #con_mobile=forms.IntegerField(required=False)
+    #con_mobile = forms.CharField(required=False)
+    con_mobile=forms.IntegerField(required=False)
     con_text=forms.CharField(300,3)
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()
