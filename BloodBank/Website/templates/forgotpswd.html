@@ -30,7 +30,6 @@
   			<!-- login -->
   			<div class="span4 row-fluid" >
 <div class="span9"><b style="font-family: 'Domine', serif;">"Blood cannot be manufactured, it can come only as a gift from a fellow human's generosity."</b></div>
-<br /><br /><br /><br />
 
 <!-- facebook plugin -->
 
@@ -53,7 +52,7 @@
     <a href="/home/">Home</a>
     </li><br /><br />
     <legend>Forgot Password?</legend>
-    <form method="post">
+    <form class="form-horizontal" method="post">
      		{% csrf_token %}
 		{% if success %}
     	<div class="alert alert-success">
@@ -65,27 +64,22 @@
     	Unable to find the Email given !!! Contact admin for help ..
     	</div>
     	{% endif %}
-    <table>
-	<tr>
-		<td>
-			Enter Your Email Id:
-		</td>
-		<td>
-			<input type="email" name="frgt_email" placeholder="Email Id" autofocus="yes" />
+    	
+    	<div class="control-group">
+    <label class="control-label" for="inputEmail">Enter Your Email Id</label>
+    <div class="controls">
+			<input id="inputEmail" type="email" name="frgt_email" placeholder="Email Id" autofocus="yes" />
 			<br /><span class="error"> {{form.frgt_email.errors.as_text}}</span>
-
-		</td>
-	</tr>
-	<tr> 
-		<td></td>
-		<td>
+    </div>
+  </div>
+    	<div class="control-group">
+    <div class="controls">
 			<button type="submit" class="btn" name="frgt_btn">Send Password</button>
-		</td>
-	</tr>
-</table>
+    </div>
+  </div>
+  		
 </form>
 		</div>	
-  			
   			<!-- instructions -->
   			<div class="span3">
   				{% include "rules.html" %}
@@ -93,5 +87,12 @@
   			</div> 
   			
   		</div>
-
 </body>
+  <footer>
+  <!-- <div class="navbar"> -->
+  <div class="navbar-inner">
+    <center>© 2012-2013 dropforlife.in All rights reserved. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/terms">Terms & Privacy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/siteby">Site design</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/contact">Contact Us</a></center>
+  </div>
+ <!-- </div> -->
+  </footer>
+</html>

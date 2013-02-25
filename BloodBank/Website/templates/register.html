@@ -1,43 +1,42 @@
-<form id="form_register" action="/register/" method="post" >
+<form class="form-horizontal" id="form_register" action="/register/" method="post" >
 	{% csrf_token %}
  	<legend>Register to proceed</legend>
- 	<table>
-<tr><td>Name </td>
-	<td><input name= "reg_name" id="name" type="text" value="{{ form.reg_name.value }}" placeholder="Your Full Name" />
+ 	 
+ 	 <div class="control-group">
+    <label class="control-label" for="inputName">Name</label>
+    <div class="controls">
+	 <input name= "reg_name" id="inputName" type="text" value="{{ form.reg_name.value }}" placeholder="Your Full Name" />
 		<br /><span class="error"> {{form.reg_name.errors.as_text}}</span>
-	</td></tr>
-<tr>
-	<td>
-	Email-Id	
-	</td>
-	<td><input id="reg_email" name="reg_emailid" type="text" value="{{ form.reg_emailid.value }}" placeholder="Primary Mail Address" />
+    </div>
+  </div>
+	  
+	  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+	 <input id="inputEmail" name="reg_emailid" type="text" value="{{ form.reg_emailid.value }}" placeholder="Primary Mail Address" />
 	<br /><span class="error">	{{ form.reg_emailid.errors.as_text }}</span>
-	</td>
-</tr>
-<tr>
-	<td>
-	Password
-	</td>
-	<td>
-	<input id="reg_pswd" name="reg_pswd" type="password" placeholder="Secret Word" />
+    </div>
+  </div>
+	 
+	  <div class="control-group">
+    <label class="control-label" for="inputPassword">Password</label>
+    <div class="controls">
+	<input id="inputPassword" name="reg_pswd" value="{{ form.reg_pswd.value }}" type="password" placeholder="Secret Word" />
+    </div>
+  </div>
 		
-	</td>
-</tr>
-<tr>
-	<td>
-		Re-Type Password
-	</td>
-	<td>
-		<input id="reg_cnfpswd" name="reg_cnfpswd" type="password" placeholder="Confirm Secret Word" />
+	  <div class="control-group">
+    <label class="control-label" for="inputCnfPassword">Re-Type Password</label>
+    <div class="controls">
+		<input id="inputCnfPassword" name="reg_cnfpswd" value="{{ form.reg_cnfpswd.value }}" type="password" placeholder="Confirm Secret Word" />
 		<br /> <span class="error">{{ form.reg_cnfpswd.errors.as_text }}</span>
-	</td>
-</tr>
-<tr>
-	<td>
-		Blood Group
-	</td>
-	<td>
-<select name="reg_bloodgroup" value="{{ form.reg_bloodgroup.as_text }}">
+    </div>
+  </div>
+	 
+	  <div class="control-group">
+    <label class="control-label" for="inputBloodGroup">Blood Group</label>
+    <div class="controls">
+<select name="reg_bloodgroup" id="inputBloodGroup" value="{{ form.reg_bloodgroup.as_text }}">
 	<option {% if form.reg_bloodgroup.value = "A1+" %}selected="True" {% endif %}>A1+</option>
 	<option {% if form.reg_bloodgroup.value = "A1-" %}selected="True" {% endif %}>A1-</option>
 	<option {% if form.reg_bloodgroup.value = "A2+" %}selected="True" {% endif %}>A2+</option>
@@ -56,113 +55,207 @@
 	<option {% if form.reg_bloodgroup.value = "A-" %}selected="True" {% endif %}>A-</option>
 </select>
 <br /><span class="error"> {{ form.reg_bloodgroup.errors.as_text }}</span>
-	</td>
-</tr>
-<tr>
-	<td>
-		Mobile 
-	</td>
-	<td>
-		<input id="mob" name="reg_mobile" type="tel" placeholder="Primary Mobile Number" value="{{ form.reg_mobile.value }}" />
+    </div>
+  </div>
+	 
+	  <div class="control-group">
+    <label class="control-label" for="inputMobile">Mobile</label>
+    <div class="controls">
+		<input id="inputMobile" name="reg_mobile" type="tel" placeholder="Primary Mobile Number" value="{{ form.reg_mobile.value }}" />
 		<br /><span class="error"> {{ form.reg_mobile.errors.as_text }}</span>
-		 </td>
-</tr>
-
-<tr>
-	<td>
-<br />		Sex
-	</td>
-	<td>
-		<input name="reg_sex" type="radio" value="Male" checked="true"/>Male
-	 	<input name="reg_sex" type="radio" value="Female" disabled="true" />Female
-	 	
-	</td>
-</tr>
-<tr>
-	<td>
-		DateOfBirth:
-	</td>
-	<td>
-		<input id="dob" name="reg_dob" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dob.value }}" />
-		<br /><span class="error"> {{ form.reg_dob.errors.as_text }}</span>
-	</td>
-</tr>
-<tr>
-	<td>
-Last Donation Date:
+    </div>
+  </div>
 		
-	</td>
-	<td>
-		<input name="reg_dolbd" id="dolbd" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dolbd.value }}" />
-		<br />* Leave blank if not donated yet..!
+	  <div class="control-group">
+    <label class="control-label" for="inputGender">Gender</label>
+    <div class="controls">
+    	<label class="radio">
+  <input type="radio" name="reg_sex" value="Male" checked>
+  Male
+</label>
+    	<label class="radio">
+  <input type="radio" name="reg_sex" value="Female" disabled="true">
+  Female
+</label>
+    </div>
+  </div>
+		  
+	  <div class="control-group">
+    <label class="control-label" for="inputDOB">Date Of Birth</label>
+    <div class="controls">
+		<input id="inputDOB" name="reg_dob" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dob.value }}" />
+		<br /><span class="error"> {{ form.reg_dob.errors.as_text }}</span>
+    </div>
+  </div>
+ 
+	  <div class="control-group">
+    <label class="control-label" for="inputDOLBD">Last Donation Date</label>
+    <div class="controls">
+		<input name="reg_dolbd" id="inputDOLBD" type="text" placeholder="Day/Month/Year" value="{{ form.reg_dolbd.value }}" />
+		<br /><span>* Leave blank if not donated yet..!</span>
 		<br /><span class="error"> {{ form.reg_dolbd.errors.as_text }}</span>
+    </div>
+  </div>
+	 
+<input type="hidden" name="reg_city" value="{{ form.reg_city.value }}" />
 
-	</td>
-</tr>
-<tr>
-	<td>
-		City
-	</td>
-	<td>
-		<select name="reg_city">
-				<option {% if form.reg_city.value = "Ariyalur" %}selected="True" {% endif %}>Ariyalur</option>
-				<option {% if form.reg_city.value = "Chennai" %}selected="True" {% endif %}>Chennai</option>
-				<option {% if form.reg_city.value = "Coimbatore" %}selected="True" {% endif %}>Coimbatore</option>
-				<option {% if form.reg_city.value = "Cuddalore" %}selected="True" {% endif %}>Cuddalore</option>
-				<option {% if form.reg_city.value = "Dharmapuri" %}selected="True" {% endif %}>Dharmapuri</option>
-				<option {% if form.reg_city.value = "Dindigul" %}selected="True" {% endif %}>Dindigul</option>
-				<option {% if form.reg_city.value = "Erode" %}selected="True" {% endif %}>Erode</option>
-				<option {% if form.reg_city.value = "Kanchipuram" %}selected="True" {% endif %}>Kanchipuram</option>
-				<option {% if form.reg_city.value = "Kanniyakumari" %}selected="True" {% endif %}>Kanniyakumari</option>
-				<option {% if form.reg_city.value = "Karur" %}selected="True" {% endif %}>Karur</option>
-				<option {% if form.reg_city.value = "Krishnagiri" %}selected="True" {% endif %}>Krishnagiri</option>
-				<option {% if form.reg_city.value = "Madurai" %}selected="True" {% endif %}>Madurai</option>
-				<option {% if form.reg_city.value = "Nagapattinam" %}selected="True" {% endif %}>Nagapattinam</option>
-				<option {% if form.reg_city.value = "Namakkal" %}selected="True" {% endif %}>Namakkal</option>
-				<option {% if form.reg_city.value = "Nilgiris" %}selected="True" {% endif %}>Nilgiris</option>
-				<option {% if form.reg_city.value = "Perambalur" %}selected="True" {% endif %}>Perambalur</option>
-				<option {% if form.reg_city.value = "Pudukottai" %}selected="True" {% endif %}>Pudukottai</option>
-				<option {% if form.reg_city.value = "Ramanathapuram" %}selected="True" {% endif %}>Ramanathapuram</option>
-				<option {% if form.reg_city.value = "Salem" %}selected="True" {% endif %}>Salem</option>
-				<option {% if form.reg_city.value = "Sivaganga" %}selected="True" {% endif %}>Sivaganga</option>
-				<option {% if form.reg_city.value = "Thanjavur" %}selected="True" {% endif %}>Thanjavur</option>
-				<option {% if form.reg_city.value = "Theni" %}selected="True" {% endif %}>Theni</option>
-				<option {% if form.reg_city.value = "Thoothukudi" %}selected="True" {% endif %}>Thoothukudi</option>
-				<option {% if form.reg_city.value = "Thiruvarur" %}selected="True" {% endif %}>Thiruvarur</option>
-				<option {% if form.reg_city.value = "Tirunelveli" %}selected="True" {% endif %}>Tirunelveli</option>
-				<option {% if form.reg_city.value = "Tiruchirappalli" %}selected="True" {% endif %}>Tiruchirappalli</option>
-				<option {% if form.reg_city.value = "Thiruvallur" %}selected="True" {% endif %}>Thiruvallur</option>
-				<option {% if form.reg_city.value = "Tiruppur" %}selected="True" {% endif %}>Tiruppur</option>
-				<option {% if form.reg_city.value = "Tiruvannamalai" %}selected="True" {% endif %}>Tiruvannamalai</option>
-				<option {% if form.reg_city.value = "Vellore" %}selected="True" {% endif %}>Vellore</option>
-				<option {% if form.reg_city.value = "Villupuram" %}selected="True" {% endif %}>Villupuram</option>
-				<option {% if form.reg_city.value = "Virudhunagar" %}selected="True" {% endif %}>Virudhunagar</option>
-		</select>
-<span class="error">{{ form.reg_city.errors.as_text }}</span>
-	</td>
-</tr>
-<!-- <tr>
-	<td>
-		Locality 
-	</td>
-	<td>
-		<select name="reg_locality" ><option>-Select Area-</option>
-	<option>Peramanoor</option>
-	<option>Suramangalam</option>
-	<option>Ammapet</option>
-	<option>FairLands</option>
-	<option>Muthupat</option>
-</select>
-	</td>
-</tr> -->
-<tr>
-	<td></td>
-	<td>
+   <div class="control-group">
+    <label class="control-label" for="inputCity">City</label>
+
+    <div class="controls">
+<span style="top: 5px; position: relative;" name="inputCity"> {{ form.reg_city.value }} </span>
+<br/><a style="top: 5px; position: relative;" href="#" onclick="javascript:history.back();">Change City</a>
+<br/><span class="error">{{ form.reg_city.errors.as_text }}</span>
+    </div>
+  </div>
+  
+<!--Fetch Location for each city starts-->
+{% if form.reg_city.value = "Ariyalur" %}
+<span> {% include "./reg-area-location/Ariyalur.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Chennai" %}
+<span> {% include "./reg-area-location/Chennai.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Coimbatore" %}
+<span> {% include "./reg-area-location/Coimbatore.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Cuddalore" %}
+<span> {% include "./reg-area-location/Cuddalore.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Dharmapuri" %}
+<span> {% include "./reg-area-location/Dharmapuri.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Dindigul" %}
+<span> {% include "./reg-area-location/Dindigul.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Erode" %}
+<span> {% include "./reg-area-location/Erode.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Kanchipuram" %}
+<span> {% include "./reg-area-location/Kanchipuram.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Kanyakumari" %}
+<span> {% include "./reg-area-location/Kanyakumari.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Karur" %}
+<span> {% include "./reg-area-location/Karur.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Krishnagiri" %}
+<span> {% include "./reg-area-location/Krishnagiri.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Madurai" %}
+<span> {% include "./reg-area-location/Madurai.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Nagapattinam" %}
+<span> {% include "./reg-area-location/Nagapattinam.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Namakkal" %}
+<span> {% include "./reg-area-location/Namakkal.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Nilgiris" %}
+<span> {% include "./reg-area-location/Nilgiris.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Perambalur" %}
+<span> {% include "./reg-area-location/Perambalur.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Pudukottai" %}
+<span> {% include "./reg-area-location/Pudukottai.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Ramanathapuram" %}
+<span> {% include "./reg-area-location/Ramanathapuram.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Salem" %}
+<span> {% include "./reg-area-location/Salem.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Sivaganga" %}
+<span> {% include "./reg-area-location/Sivaganga.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Thanjavur" %}
+<span> {% include "./reg-area-location/Thanjavur.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Theni" %}
+<span> {% include "./reg-area-location/Theni.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Thoothukudi" %}
+<span> {% include "./reg-area-location/Thoothukudi.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Thiruvarur" %}
+<span> {% include "./reg-area-location/Thiruvarur.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Tirunelveli" %}
+<span> {% include "./reg-area-location/Tirunelveli.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Tiruchirappalli" %}
+<span> {% include "./reg-area-location/Tiruchirappalli.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Thiruvallur" %}
+<span> {% include "./reg-area-location/Thiruvallur.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Tiruppur" %}
+<span> {% include "./reg-area-location/Tiruppur.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Tiruvannamalai" %}
+<span> {% include "./reg-area-location/Tiruvannamalai.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Vellore" %}
+<span> {% include "./reg-area-location/Vellore.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Villupuram" %}
+<span> {% include "./reg-area-location/Villupuram.html" %} </span> 
+{% endif %}
+
+{% if form.reg_city.value = "Virudhunagar" %}
+<span> {% include "./reg-area-location/Virudhunagar.html" %} </span> 
+{% endif %}
+
+<!--Fetch Location for each city ends-->
+		  <div class="control-group">
+    <div class="controls">
+  {% autoescape off %}
+     {{ script }}
+
+ {% if  captchaerror %}
+ <span class="error"> Captcha entered is wrong !!</span>
+ {% endif %}
+ {% endautoescape %}
+    </div>
+  </div>
+
+		  <div class="control-group">
+    <div class="controls">
 		<button class="btn" type="submit" id="btn_reg_submit">Submit</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<button class="btn" id="btn_reg_reset" type="reset">Reset</button>
-	</td>
-</tr>
-</table>
-
+    </div>
+  </div>
 </form>

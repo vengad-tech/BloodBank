@@ -1,31 +1,36 @@
- <form id="form_login" action="" method="post">	
+ <form class="form-horizontal" id="form_login" action="" method="post">	
  		{% csrf_token %}
 
  	<div id="form_login">
  		<legend>Login to proceed</legend>
- 		<table>
-  	<tr>
-  		
-  	<td> Email:</td>
-    <td><input id="emailid" name="log_emailid" autofocus="yes" onfocusout="validate-email" type="email" placeholder="Email Address" value="{{ form.log_emailid.value }}">
+ 		 
+<div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+     <input id="inputEmail" name="log_emailid" autofocus="yes" onfocusout="validate-email" type="email" placeholder="Email Address" value="{{ form.log_emailid.value }}">
 	<br /><span class="error"> {{form.log_emailid.errors.as_text}} </span>
-    	</td>
-    </tr>
-    <tr>
-   <td>Password:</td>
-   <td><input id="pswd" type="password" name="log_pswd" placeholder="Password">
+    </div>
+  </div>  	 
+  		
+<div class="control-group">
+    <label class="control-label" for="inputPassword">Password</label>
+    <div class="controls">
+    <input id="inputPassword" type="password" name="log_pswd" placeholder="Password">
    	<br /> <span class="error"> {{ form.log_pswd.errors.as_text}} </span>
-   </td></tr>
-<tr>   		<td></td> <td><a href="/forgotpswd" id="forgotpswd" name="log_forgotpswd">Forgot Password!</a>
+   	<br /><a href="/forgotpswd" id="forgotpswd" name="log_forgotpswd">Forgot Password!</a>
 
-   </td>
-   </tr>
-   <tr>
-   	<td></td>
-    <td><button  class="btn">Login</button>
-    	&nbsp;&nbsp;&nbsp;&nbsp;<a id="btn_register"  class="btn" href ="/register">Register</a></td>
-    </tr>
-  </table>
+    </div>
+  </div>    
+     
+
+<div class="control-group">
+    <div class="controls">
+     <button  class="btn">Login</button>
+    	&nbsp;&nbsp;&nbsp;&nbsp;<a id="btn_register"  class="btn" href ="/preregister">Register</a> 
+    </div>
+  </div>    
+     
+   
 
 	</div>
 </form>

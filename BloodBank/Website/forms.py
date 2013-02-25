@@ -5,6 +5,7 @@ from datetime import timedelta
 import re
 from models import RegisteredUsers
 from models import Feedback
+#from recaptcha.client import captcha
 
 class ContactForm(forms.Form):
     con_name=forms.CharField(30,3)
@@ -97,6 +98,82 @@ class ProfileForm(forms.Form):
         # Always return the full collection of cleaned data.
         return cleaned_data
 
+class PreregisterForm(forms.Form):
+    pre_reg_name=forms.CharField(30,3)
+    pre_reg_emailid = forms.EmailField()
+    pre_reg_pswd = forms.CharField(None,5)
+    pre_reg_cnfpswd= forms.CharField(None,5)
+    pre_reg_bloodgroup = forms.CharField(4,2)
+    pre_reg_mobile = forms.IntegerField()
+    pre_reg_hidemob = forms.CharField(required=False)
+    pre_reg_sex = forms.CharField(6,4)
+    pre_reg_dob = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    pre_reg_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,required=False)
+    pre_reg_city = forms.CharField(20,3)
+    def clean(self):
+        cleaned_data = super(PreregisterForm, self).clean()
+        pre_reg_emailid = cleaned_data.get("pre_reg_emailid")
+        pre_reg_pswd = cleaned_data.get("pre_reg_pswd")
+        pre_reg_cnfpswd = cleaned_data.get("pre_reg_cnfpswd")
+        pre_reg_dob = cleaned_data.get("pre_reg_dob")
+        pre_reg_dolbd = cleaned_data.get("pre_reg_dolbd")
+        today = datetime.date.today()
+        pre_reg_mobile = cleaned_data.get("pre_reg_mobile")
+        pre_reg_name = cleaned_data.get("pre_reg_name")
+        #18 yrs minimum to donate blood
+        year = timedelta(days=365*18)
+        try:
+            if pre_reg_dob > today :
+                msg = u"Must be 1 day or Older "
+                self._errors["pre_reg_dob"] = self.error_class([msg])
+        except:
+            pass
+        try:
+            if  pre_reg_dolbd != None and (pre_reg_dolbd > today or pre_reg_dolbd < pre_reg_dob + year):
+                msg = u"Enter a Resonable Date "
+                self._errors["pre_reg_dolbd"] = self.error_class([msg])
+        except:
+            pass
+        try:
+            if pre_reg_mobile < 7000000000 or pre_reg_mobile > 9999999999:
+                msg = u"Invalid Mobile number "
+                self._errors["pre_reg_mobile"] = self.error_class([msg])
+        except:
+            pass
+        try:
+            if re.match(r'^[a-zA-Z. ]*$', pre_reg_name) is None:
+                msg = u"Invalid Characters in Name "
+                self._errors["pre_reg_name"] = self.error_class([msg])
+        except:
+            pass
+                
+        #checking if email id is already registerd or not 
+        try:
+            user = RegisteredUsers.objects.filter(email=pre_reg_emailid)
+            if len(user) > 0 :
+                msg = u"Email ID already registerd "
+                self._errors["pre_reg_emailid"] = self.error_class([msg])
+        except:        
+            pass
+        if pre_reg_pswd != pre_reg_cnfpswd:
+            # We know these are not in self._errors now (see discussion
+            # below).
+            msg = u"Password Doesnt match"
+            self._errors["pre_reg_pswd"] = self.error_class([msg])
+            self._errors["pre_reg_cnfpswd"] = self.error_class([msg])
+
+            # These fields are no longer valid. Remove them from the
+            # cleaned data.
+            try:
+                del cleaned_data["pre_reg_pswd"]
+                del cleaned_data["pre_reg_cnfpswd"]
+            except:
+                pass
+
+        # Always return the full collection of cleaned data.
+        return cleaned_data
+    
+        
         
 class RegisterForm(forms.Form):
     reg_name=forms.CharField(30,3)
@@ -110,6 +187,8 @@ class RegisterForm(forms.Form):
     reg_dob = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     reg_dolbd = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,required=False)
     reg_city = forms.CharField(20,3)
+    reg_location = forms.CharField(30,3)
+    
     def clean(self):
         
         cleaned_data = super(RegisterForm, self).clean()

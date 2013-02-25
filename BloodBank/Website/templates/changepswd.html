@@ -30,7 +30,6 @@
   			<!-- login -->
   			<div class="span4 row-fluid" >
 <div class="span9"><b style="font-family: 'Domine', serif;">"Blood cannot be manufactured, it can come only as a gift from a fellow human's generosity."</b></div>
-<br /><br /><br /><br />
 
 <!-- facebook plugin -->
 
@@ -56,7 +55,7 @@
     <li class="active"><a href="/changepswd">Change Password</a></li>
     <li><a id="lnk_logout" href="/logoutsite">Logout</a></li>
     </ul>
-    <form method="POST">
+    <form class="form-horizontal" method="POST">
     	{% if updated %}
     	<div class="alert alert-success">
     	Password Changed Successfully !!
@@ -64,45 +63,42 @@
     	{% endif %}
     	{% csrf_token %}
   				<legend>Change Password</legend>
-<table>
-<tr>
-	<td>
-		Old Password:
-	</td>
-	<td>
+ 
 		<input type="hidden" name="emailid" value="{{ emailid }}" />
-		<input type="password" name="old_pswd" placeholder="Old Password" autofocus="yes"  />
+ 
+	 <div class="control-group">
+	 	<label class="control-label" for="inputOldPassword">Old Password</label>
+		<div class="controls">
+		<input type="password" id="inputOldPassword" name="old_pswd" placeholder="Old Password" autofocus="yes"  />
 		<br /><span class="error"> {{ passwordform.old_pswd.errors.as_text }}</span>
-	</td>
-</tr>
-<tr>
-	<td>
-		New Password:
-	</td>
-	<td>
-		<input type="password" name="new_pswd" placeholder="New Password" />
-	</td>
-</tr>
-<tr>
-	<td>
-		Confirm New Password:
-	</td>
-	<td>
-		<input type="password" name="cnf_new_pswd" placeholder="Retype New Password" />
+    </div>
+  </div>
+	 
+	 <div class="control-group">
+	 	<label class="control-label" for="inputNewPassword">New Password</label>
+		<div class="controls">
+		<input id="inputNewPassword" type="password" name="new_pswd" placeholder="New Password" />
+    </div>
+  </div>
+	 
+	 <div class="control-group">
+	 	<label class="control-label" for="inputCnfNewPassword">Confirm New Password</label>
+		<div class="controls">
+		<input type="password" id="inputCnfNewPassword" name="cnf_new_pswd" placeholder="Retype New Password" />
 	<br /><span class="error"> {{ passwordform.cnf_new_pswd.errors.as_text }}</span>
-	</td>
-</tr>
-	<tr>
-		<td>
-			
-		</td>
-		<td>
+    </div>
+  </div>
+		
+	 <div class="control-group">
+		<div class="controls">
 			<button class="btn" type="submit">Save</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="btn" type="reset">Reset</button>
-		</td>
-	</tr>
-</table>
+    </div>
+  </div>
+		 
+	 
+ 
 </form>
   			</div>	
   			

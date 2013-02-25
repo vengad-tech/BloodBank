@@ -36,7 +36,6 @@
   			<!-- login -->
   			<div class="span4 row-fluid" >
 <div class="span9"><b style="font-family: 'Domine', serif;">"Blood cannot be manufactured, it can come only as a gift from a fellow human's generosity."</b></div>
-<br /><br /><br /><br />
 
 <!-- facebook plugin -->
 			<span class="hidden-phone">
@@ -68,7 +67,9 @@
     
     <!-- <li><a href="/profile/">Profile</a></li> -->
     </ul>
-  				{% if reg %}
+    			{% if prereg %}
+    			{% include "preregister.html" %}
+    			{% elif reg %}
   				{% include "register.html" %} 
   				{% else %}
   				{% include "login.html" %}

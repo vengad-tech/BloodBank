@@ -30,7 +30,6 @@
   			<!-- login -->
   			<div class="span4 row-fluid" >
 <div class="span9"><b style="font-family: 'Domine', serif;">"Blood cannot be manufactured, it can come only as a gift from a fellow human's generosity."</b></div>
-<br /><br /><br /><br />
 
 <!-- facebook plugin -->
 
@@ -57,7 +56,7 @@
     <li><a href="/changepswd">Change Password</a></li>
     <li><a id="lnk_logout" href="/logoutsite">Logout</a></li>
     </ul>
-    <form method="POST">
+    <form class="form-horizontal" method="POST">
     	{% if updated %}
     	<div class="alert alert-success">
     	Updated Successfully !!
@@ -65,69 +64,92 @@
     	{% endif %}
     	{% csrf_token %}
   				<legend>My Profile</legend>
-<table>
-	<tr>
-<td>
-	Name:
-</td>	
-<td>
 	<input type="hidden" name="prof_oldemail" value="{{ oldemail }}"/>
-	<input type="text" name="prof_name" placeholder="Your Full Name"  value="{% firstof userprof.prof_name.value userprof.name %}"/></td>	
+	 
+  <div class="control-group">
+    <label class="control-label" for="inputName">Name</label>
+    <div class="controls">
+	<input id="inputName" type="text" name="prof_name" placeholder="Your Full Name"  value="{% firstof userprof.prof_name.value userprof.name %}"/> 	
 	<br /><span class="error"> {{userprof.prof_name.errors.as_text}}</span>
-	</tr>
-	<tr><td>
-		Emailid:
-	</td>
-	<td>
-		<input type="email" name="prof_emailid" placeholder="Primary Email Id" value="{% firstof userprof.prof_emailid.value userprof.email %}" />
+    </div>
+  </div>
+	 
+ <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+    <input id="inputEmail" type="email" name="prof_emailid" placeholder="Primary Email Id" value="{% firstof userprof.prof_emailid.value userprof.email %}" />
 	<br /><span class="error"> {{userprof.prof_emailid.errors.as_text}}</span>
-	</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td>
-			Mobile:
-		</td>
-		<td>
-			<input type="tel" name="prof_mobile" placeholder="Mobile" value="{% firstof userprof.prof_mobile.value userprof.mobile %}"/>
+    </div>
+  </div>	  
+		
+ <div class="control-group">
+    <label class="control-label" for="inputMobile">Mobile</label>
+    <div class="controls">
+			<input id="inputMobile" type="tel" name="prof_mobile" placeholder="Mobile" value="{% firstof userprof.prof_mobile.value userprof.mobile %}"/>
 		<br /><span class="error"> {{userprof.prof_mobile.errors.as_text}}</span>
-		</td>
-	</tr>
+    </div>
+  </div>		 
 
-	<tr>
-		<td>
-			Last Blood Donation Date:
-		</td>
-		<td>
-			<input  type="text" name="prof_dolbd" placeholder="Date/Month/Year" value="{% if userprof.dolbd %}{{ userprof.dolbd|date:"d-m-Y"}}{% else %}{{userprof.prof_dolbd.value  }}{% endif %}"/>
-		<br /><span class="error"> {{userprof.prof_dolbd.errors.as_text}}</span>
+ <div class="control-group">
+    <label class="control-label" for="inputDOLBD">Last Blood Donation Date</label>
+    <div class="controls">
+			<input id="inputDOLBD" type="text" name="prof_dolbd" placeholder="Date/Month/Year" value="{% if userprof.dolbd %}{{ userprof.dolbd|date:"d-m-Y"}}{% else %}{{userprof.prof_dolbd.value  }}{% endif %}"/>
 		<br />* Leave blank if not donated yet..!
-		</td>
-	</tr>
-	<tr>
-		<td>City:</td>
-		<td>
-			<select name="prof_city" value="">
-	<option {% if userprof.city == 'Salem' or userprof.prof_city.value == "Salem" %}selected {% endif %}>Salem</option>
-	<option {% if userprof.city == 'Coimbatore' or userprof.prof_city.value == "Coimbatore"%}selected {% endif %}>Coimbatore</option>
-	<option  {% if userprof.city == 'Madurai' or userprof.prof_city.value == "Madurai" %}selected {% endif %} >Madurai</option>
-	<option {% if userprof.city == 'Erode' or userprof.prof_city.value == "Erode" %}selected {% endif %} >Erode</option>
-</select>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			
-		</td>
-		<td>
-			<button class="btn" type="submit">Save</button>
+				<br /><span class="error"> {{userprof.prof_dolbd.errors.as_text}}</span>
+
+    </div>
+  </div>			
+		 
+ <div class="control-group">
+    <label class="control-label" for="inputCity">City</label>
+    <div class="controls">
+			<select id="inputCity" name="prof_city" value="">
+				
+				<option {% if userprof.city == 'Ariyalur' or userprof.prof_city.value == "Ariyalur" %}selected {% endif %}>Ariyalur</option>
+				<option {% if userprof.city == 'Chennai' or userprof.prof_city.value == "Chennai"%}selected {% endif %}>Chennai</option>
+				<option {% if userprof.city == 'Coimbatore' or userprof.prof_city.value == "Coimbatore" %}selected {% endif %} >Coimbatore</option>
+				<option {% if userprof.city == 'Cuddalore' or userprof.prof_city.value == "Cuddalore" %}selected {% endif %} >Cuddalore</option>
+				<option {% if userprof.city == 'Dharmapuri' or userprof.prof_city.value == "Dharmapuri" %}selected {% endif %}>Dharmapuri</option>
+				<option {% if userprof.city == 'Dindigul' or userprof.prof_city.value == "Dindigul"%}selected {% endif %}>Dindigul</option>
+				<option {% if userprof.city == 'Erode' or userprof.prof_city.value == "Erode" %}selected {% endif %} >Erode</option>
+				<option {% if userprof.city == 'Kanchipuram' or userprof.prof_city.value == "Kanchipuram" %}selected {% endif %} >Kanchipuram</option>
+				<option {% if userprof.city == 'Kanyakumari' or userprof.prof_city.value == "Kanyakumari" %}selected {% endif %}>Kanyakumari</option>
+				<option {% if userprof.city == 'Karur' or userprof.prof_city.value == "Karur"%}selected {% endif %}>Karur</option>
+				<option {% if userprof.city == 'Krishnagiri' or userprof.prof_city.value == "Krishnagiri" %}selected {% endif %} >Krishnagiri</option>
+				<option {% if userprof.city == 'Madurai' or userprof.prof_city.value == "Madurai" %}selected {% endif %} >Madurai</option>
+				<option {% if userprof.city == 'Nagapattinam' or userprof.prof_city.value == "Nagapattinam" %}selected {% endif %}>Nagapattinam</option>
+				<option {% if userprof.city == 'Namakkal' or userprof.prof_city.value == "Namakkal"%}selected {% endif %}>Namakkal</option>
+				<option {% if userprof.city == 'Nilgiris' or userprof.prof_city.value == "Nilgiris" %}selected {% endif %} >Nilgiris</option>
+				<option {% if userprof.city == 'Perambalur' or userprof.prof_city.value == "Perambalur" %}selected {% endif %} >Perambalur</option>
+				<option {% if userprof.city == 'Pudukottai' or userprof.prof_city.value == "Pudukottai" %}selected {% endif %}>Pudukottai</option>
+				<option {% if userprof.city == 'Ramanathapuram' or userprof.prof_city.value == "Ramanathapuram" %}selected {% endif %} >Ramanathapuram</option>
+				<option {% if userprof.city == 'Salem' or userprof.prof_city.value == "Salem" %}selected {% endif %} >Salem</option>
+				<option {% if userprof.city == 'Sivaganga' or userprof.prof_city.value == "Sivaganga" %}selected {% endif %}>Sivaganga</option>
+				<option {% if userprof.city == 'Thanjavur' or userprof.prof_city.value == "Thanjavur"%}selected {% endif %}>Thanjavur</option>
+				<option {% if userprof.city == 'Theni' or userprof.prof_city.value == "Theni" %}selected {% endif %} >Theni</option>
+				<option {% if userprof.city == 'Thoothukudi' or userprof.prof_city.value == "Thoothukudi" %}selected {% endif %} >Thoothukudi</option>
+				<option {% if userprof.city == 'Thiruvarur' or userprof.prof_city.value == "Thiruvarur" %}selected {% endif %} >Thiruvarur</option>
+				<option {% if userprof.city == 'Tirunelveli' or userprof.prof_city.value == "Tirunelveli" %}selected {% endif %} >Tirunelveli</option>
+				<option {% if userprof.city == 'Tiruchirappalli' or userprof.prof_city.value == "Tiruchirappalli" %}selected {% endif %}>Tiruchirappalli</option>
+				<option {% if userprof.city == 'Thiruvallur' or userprof.prof_city.value == "Thiruvallur"%}selected {% endif %}>Thiruvallur</option>
+				<option {% if userprof.city == 'Tiruppur' or userprof.prof_city.value == "Tiruppur" %}selected {% endif %} >Tiruppur</option>
+				<option {% if userprof.city == 'Tiruvannamalai' or userprof.prof_city.value == "Tiruvannamalai" %}selected {% endif %} >Tiruvannamalai</option>
+				<option {% if userprof.city == 'Vellore' or userprof.prof_city.value == "Vellore" %}selected {% endif %}>Vellore</option>
+				<option {% if userprof.city == 'Villupuram' or userprof.prof_city.value == "Villupuram"%}selected {% endif %}>Villupuram</option>
+				<option {% if userprof.city == 'Virudhunagar' or userprof.prof_city.value == "Virudhunagar" %}selected {% endif %} >Virudhunagar</option>
+			</select>
+    </div>
+  </div>		 
+		 
+	  <div class="control-group">
+    <div class="controls">
+      		<button class="btn" type="submit">Save</button>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="btn" type="reset">Reset</button>
-		</td>
-	</tr>
-</table>
+		  </div>
+  </div> 
+	 
+ 
 </form>
   			</div>	
   			

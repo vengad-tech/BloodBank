@@ -13,7 +13,8 @@ class RegisteredUsers(models.Model):
     dob = models.DateField()
     dolbd = models.DateField(null=True,blank=True)
     city = models.CharField(max_length=20)
-    hidemob = models.CharField(max_length=3)
+    location = models.CharField(max_length=30)
+#    hidemob = models.CharField(max_length=3)
 #    reportedTimes = models.IntegerField(null=True,blank=True)
     
 class Feedback(models.Model):

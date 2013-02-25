@@ -28,7 +28,6 @@
   			<!-- login -->
   			<div class="span4 row-fluid" >
 <div class="span9"><b style="font-family: 'Domine', serif;">"Blood cannot be manufactured, it can come only as a gift from a fellow human's generosity."</b></div>
-<br /><br /><br /><br />
 <!-- facebook plugin -->
 
 			<span class="hidden-phone">
@@ -55,7 +54,7 @@
     <!-- <li><a href="/profile/">Profile</a></li> -->
     </ul>
 
-<form method="post" action="/contact/">
+<form class="form-horizontal" method="post" action="/contact/">
 	{% if success %}
     	<div class="alert alert-success">
     	Feedback Submitted Successfully !!
@@ -64,51 +63,48 @@
 		{% csrf_token %}
 
 <legend>Contact Form</legend>
-<table>
-	<tr>
-		<td>Name:</td>
-		<td>
-<input type="text" name="con_name" placeholder="Your Full Name" autofocus="yes"  />
+ 
+	 <div class="control-group">
+    <label class="control-label" for="inputName">Name</label>
+    <div class="controls">
+<input id="inputName" type="text" name="con_name" placeholder="Your Full Name" autofocus="yes"  />
 		<br /><span class="error"> {{form.con_name.errors.as_text}}</span>
-
-			
-		</td>
-		
-	</tr>
-	<tr>
-		<td>Email Id(Optional):</td>
-		<td>
-<input type="email" name="con_emailid" placeholder="Primary Email Id" />
+    </div>
+  </div>
+		  
+	 <div class="control-group">
+    <label class="control-label" for="inputEmail">Email Id(Optional)</label>
+    <div class="controls">
+<input id="inputEmail" type="email" name="con_emailid" placeholder="Primary Email Id" />
 		<br /><span class="error"> {{form.con_emailid.errors.as_text}}</span>			
-		</td>
-	</tr>
-	<tr>
-		<td>Mobile No.:(Optional):</td>
-		<td>
-<input type="tel" name="con_mobile" placeholder="Mobile Number" />
+    </div>
+  </div>
+		 
+	 <div class="control-group">
+    <label class="control-label" for="inputMobile">Mobile No.(Optional)</label>
+    <div class="controls">
+<input id="inputMobile" type="tel" name="con_mobile" placeholder="Mobile Number" />
 		<br /><span class="error"> {{form.con_mobile.errors.as_text}}</span>			
-		</td>
-	</tr>
-	<tr>
-		<td>Write to us:</td>
-		<td>
-<textarea name="con_text" placeholder="Suggestions/Complaints" ></textarea>
-			
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>
+    </div>
+  </div>
+		  
+	 <div class="control-group">
+    <label class="control-label" for="inputFeedback">Write to us</label>
+    <div class="controls">
+<textarea id="inputFeedback" name="con_text" placeholder="Suggestions/Complaints" ></textarea>
+    </div>
+  </div>
+		  
+	 <div class="control-group">
+    <div class="controls">
 <button class="btn" type="submit" name="con_submit">Submit</button>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <a href="/home" class="btn">Cancel</a>
-			
-		</td>
-	</tr>
-</table>
+    </div>
+  </div>
+		 
 </form>
 		</div>	
-  			
   			<!-- instructions -->
   			<div class="span3">
   				{% include "rules.html" %}

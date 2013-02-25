@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from forms import RegisterForm
+from forms import PreregisterForm
 from forms import LoginForm
 from forms import SearchForm
 from forms import ProfileForm
@@ -21,48 +22,127 @@ from forms import PasswordForm
 from forms import ForgotPassword
 from models import Feedback
 from forms import ContactForm
+from BloodBank import settings 
+#from recaptcha.client import captcha
+from recaptcha.client.captcha import displayhtml
+from recaptcha.client.captcha import submit
+
 import sys
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #from django.contrib.formtools.tests.wizard.forms import request
 #from django.contrib.formtools.tests.wizard.forms import request
+
+#def display_form(request):
+#    form = SomeForm()
+#    # assuming your keys are in settings.py
+#    public_key = settings.RECAPTCHA_PUBLIC_KEY
+#    script = displayhtml(public_key=public_key)
+#    return render_to_response('form.html', {'form':form,'script':script}, context_instance=RequestContext(request))
+#)
+    
+def check_captcha(request):
+    remote_ip = request.META['REMOTE_ADDR']
+    challenge = request.POST['recaptcha_challenge_field']
+    response = request.POST['recaptcha_response_field']
+    private_key = settings.RECAPTCHA_PRIVATE_KEY
+    return submit(challenge, response, private_key, remote_ip)
+
 def register(request):
+    public_key = settings.RECAPTCHA_PUBLIC_KEY
+    script = displayhtml(public_key=public_key)
+#    form = RegisterForm(request.POST())
+#    if form.reg_location != None:
+#    result = check_captcha(request)
     if request.method == 'POST': # If the form has been submitted...
         form = RegisterForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            # ...
-            #Add users to db 
-            user = RegisteredUsers()
-            try:
-                user.email = form.cleaned_data["reg_emailid"]
-                user.pswd = form.cleaned_data["reg_pswd"]
-                user.name = form.cleaned_data["reg_name"]
-                user.bloodgroup = form.cleaned_data["reg_bloodgroup"]
-                user.dob = form.cleaned_data["reg_dob"]
-                user.dolbd = form.cleaned_data["reg_dolbd"]
-                #if user.dolbd is None:
-                #    user.dolbd = "1991-01-01"
-                user.sex = form.cleaned_data["reg_sex"]
-                user.mobile = str(form.cleaned_data["reg_mobile"])
-                user.hidemob = form.cleaned_data["reg_hidemob"]
-                user.city = form.cleaned_data["reg_city"]
-                user.save()
-            except:
-                print sys.exc_info()[1]
-                return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
-            return render_to_response("login_redirect.html",{})
-            #return HttpResponseRedirect('/registered/') # Redirect after POST
+        #public_key = settings.RECAPTCHA_PUBLIC_KEY
+        
+#        if form.is_valid():
+        hasLocation = True
+        try:
+            a = request.POST["reg_location"]
+        except:
+            hasLocation = False
+            
+        if hasLocation:
+            result = check_captcha(request)
+            if form.is_valid() and result.is_valid: # All validation rules pass
+                # Process the data in form.cleaned_data
+                # ...
+                #Add users to db 
+                user = RegisteredUsers()
+                try:
+                    user.email = form.cleaned_data["reg_emailid"]
+                    user.pswd = form.cleaned_data["reg_pswd"]
+                    user.name = form.cleaned_data["reg_name"]
+                    user.bloodgroup = form.cleaned_data["reg_bloodgroup"]
+                    user.dob = form.cleaned_data["reg_dob"]
+                    user.dolbd = form.cleaned_data["reg_dolbd"]
+                    #if user.dolbd is None:
+                    #    user.dolbd = "1991-01-01"
+                    user.sex = form.cleaned_data["reg_sex"]
+                    user.mobile = str(form.cleaned_data["reg_mobile"])
+                    user.hidemob = form.cleaned_data["reg_hidemob"]
+                    user.city = form.cleaned_data["reg_city"]
+                    user.location = form.cleaned_data["reg_location"]
+                    user.save()
+                except:
+                    print sys.exc_info()[1]
+                    return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
+                return render_to_response("login_redirect.html",{})
+                #return HttpResponseRedirect('/registered/') # Redirect after POST
+            else:
+                
+                c={}
+                c.update(csrf(request))
+                if(result.is_valid != True):
+                    c.update({"captchaerror":True})
+                c.update({'script':script})
+                c.update({"form":form})
+                c.update({"test":"testing"})
+                c.update({"reg":True})
+                #r-turn HttpResponse("validation failed because "+str(c))
+                return render_to_response('index.html',c)
+        else:
+            c = {}
+            c.update({"form":form})
+            c.update({"reg":True})
+            c.update(csrf(request))
+            c.update({'script':script})
+            return render_to_response('index.html',c)
+
+            
+        
+            
+    c = {}
+    c.update({"reg":True})
+    c.update(csrf(request))
+    c.update({'script':script})
+    return render_to_response('index.html',c)
+
+def preregister(request):
+#    public_key = settings.RECAPTCHA_PUBLIC_KEY
+#   script = displayhtml(public_key=public_key)
+    if request.method == 'POST':
+        form = PreregisterForm(request.POST)
+#        result = check_captcha(request)
+#        if form.is_valid() and result.is_valid:
+        if form.is_valid:
+            c={}
+#            c.update({'script':script})
+            c.update(csrf(request))
+            c.update({"form":form})
+            c.update({"reg":True})
+            return render_to_response('index.html',c)
         else:
             c={}
             c.update(csrf(request))
             c.update({"form":form})
-            c.update({"test":"testing"})
-            c.update({"reg":True})
-            #r-turn HttpResponse("validation failed because "+str(c))
+            c.update({"prereg":True})
             return render_to_response('index.html',c)
-    c = {}
-    c.update({"reg":True})
+    c={}
     c.update(csrf(request))
+    c.update({"prereg":True})
     return render_to_response('index.html',c)
 
 def home(request):
@@ -81,7 +161,6 @@ def home(request):
             return render_to_response('index.html',c)
     if(islogin(request)):
         return HttpResponseRedirect("/search")
-        
     c = {} 
     c.update(csrf(request))
     return render_to_response('index.html',c)

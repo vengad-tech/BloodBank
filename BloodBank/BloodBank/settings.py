@@ -118,6 +118,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Website',
+    'recaptcha.client.captcha',
+   # 'captcha',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -152,3 +154,6 @@ LOGGING = {
         },
     }
 }
+
+RECAPTCHA_PUBLIC_KEY = '6LcD0dwSAAAAACO7ugenxoPeOp5D-LXhmYlL3QKU'
+RECAPTCHA_PRIVATE_KEY = '6LcD0dwSAAAAACB1ULewnUSFUvY4IJIhm01xI7mO'

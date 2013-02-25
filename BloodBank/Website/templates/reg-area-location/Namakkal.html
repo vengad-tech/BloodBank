@@ -1,0 +1,11 @@
+<div class="control-group">
+<label class="control-label" for="inputLocation">Location</label>
+	<div class="controls">
+		<select id="inputLocation" name="reg_location">
+	<option {% if form.reg_location.value = "Namakkal" %}selected="True" {% endif %}>Namakkal</option>
+	<option {% if form.reg_location.value = "Velur" %}selected="True" {% endif %}>Velur</option>
+	<option {% if form.reg_location.value = "Tiruchengode" %}selected="True" {% endif %}>Tiruchengode</option>
+	<option {% if form.reg_location.value = "Rasipuram" %}selected="True" {% endif %}>Rasipuram</option>
+	</select>
+</div>
+</div>

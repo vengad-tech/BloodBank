@@ -30,7 +30,6 @@
   			<!-- login -->
   			<div class="span4 row-fluid" >
 <div class="span9"><b style="font-family: 'Domine', serif;">"Blood cannot be manufactured, it can come only as a gift from a fellow human's generosity."</b></div>
-<br /><br /><br /><br />
 
 <!-- facebook plugin -->
 
@@ -56,16 +55,13 @@
     <li><a href="/changepswd">Change Password</a></li>
     <li><a href="/logoutsite">Logout</a></li>
     </ul>
-<form method="get" >
+<form  class="form-horizontal" method="get" >
 	
   				<legend>Search Donor</legend>
-<table>
-	<tr>
-		<td>
-			Blood Group:
-		</td>
-		<td>
-			<select name="srch_bloodgroup">
+ <div class="control-group">
+    <label class="control-label" for="inputBloodGroup">Blood Group</label>
+    <div class="controls">
+			<select id="inputBloodGroup" name="srch_bloodgroup">
 	<option {% if bloodgroup = "A1+" %}selected="True" {% endif %}>A1+</option>
 	<option {% if bloodgroup = "A1-" %}selected="True" {% endif %}>A1-</option>
 	<option {% if bloodgroup = "A2+" %}selected="True" {% endif %}>A2+</option>
@@ -83,12 +79,13 @@
 	<option {% if bloodgroup = "A+" %}selected="True" {% endif %}>A+</option>
 	<option {% if bloodgroup = "A-" %}selected="True" {% endif %}>A-</option>
 </select>
-		</td>
-	</tr>
-	<tr>
-		<td>City:</td>
-		<td>
-			<select name="srch_city">
+    </div>
+  </div>
+
+ <div class="control-group">
+    <label class="control-label" for="inputCity">City</label>
+    <div class="controls">
+			<select id="inputCity" name="srch_city">
 				<option {% if city = "Ariyalur" %}selected="True" {% endif %}>Ariyalur</option>
 				<option {% if city = "Chennai" %}selected="True" {% endif %}>Chennai</option>
 				<option {% if city = "Coimbatore" %}selected="True" {% endif %}>Coimbatore</option>
@@ -122,16 +119,13 @@
 				<option {% if city = "Villupuram" %}selected="True" {% endif %}>Villupuram</option>
 				<option {% if city = "Virudhunagar" %}selected="True" {% endif %}>Virudhunagar</option>
 			</select>
-		</td>
-		
-	</tr>
-	<tr>
-		<td></td>
-		<td>
+    </div>
+  </div>
+   <div class="control-group">
+    <div class="controls">
 			<button id="btn_srch_donor" class="btn" type="submit">Find Donor</button>
-		</td>
-	</tr>
-</table>
+    </div>
+  </div>
 </form>
 <!--Search results of Blood Donors-->
 {% if results != None %}
@@ -163,6 +157,7 @@
 			<th>Age</th>
 			<th>Email Id</th>
 			<th>Mobile</th>
+			<th>Report</th>
 			</tr>
 		
 	{% for user in results %}
