@@ -2,10 +2,18 @@
 <label class="control-label" for="inputLocation">Location</label>
 	<div class="controls">
 		<select id="inputLocation" name="reg_location">
-	<option {% if form.reg_location.value = "Kunnam-taluk" %}selected="True" {% endif %}>Kunnam-taluk</option>
+<!--	<option {% if form.reg_location.value = "Kunnam-taluk" %}selected="True" {% endif %}>Kunnam-taluk</option>
 	<option {% if form.reg_location.value = "Alathur-taluk" %}selected="True" {% endif %}>Alathur-taluk</option>
 	<option {% if form.reg_location.value = "Veppanthattai-taluk" %}selected="True" {% endif %}>Veppanthattai-taluk</option>
 	<option {% if form.reg_location.value = "Perambalur-taluk" %}selected="True" {% endif %}>Perambalur-taluk</option>
+-->
+
+	<option {% if form.reg_location.value = "Andimadam" %}selected="True" {% endif %}>Andimadam</option>
+	<option {% if form.reg_location.value = "Ariyalur" %}selected="True" {% endif %}>Ariyalur</option>
+	<option {% if form.reg_location.value = "Jayankondam" %}selected="True" {% endif %}>Jayankondam</option>
+	<option {% if form.reg_location.value = "Perambalur" %}selected="True" {% endif %}>Perambalur</option>
+	<option {% if form.reg_location.value = "Varahur" %}selected="True" {% endif %}>Varahur</option>
+
 </select>
 </div>
 </div>

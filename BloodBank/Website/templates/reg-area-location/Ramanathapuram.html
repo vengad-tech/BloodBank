@@ -2,13 +2,21 @@
 <label class="control-label" for="inputLocation">Location</label>
 	<div class="controls">
 		<select id="inputLocation" name="reg_location">
-	<option {% if form.reg_location.value = "Ramanathapuram" %}selected="True" {% endif %}>Ramanathapuram</option>
+<!--	<option {% if form.reg_location.value = "Ramanathapuram" %}selected="True" {% endif %}>Ramanathapuram</option>
 	<option {% if form.reg_location.value = "Kadaladi" %}selected="True" {% endif %}>Kadaladi</option>
 	<option {% if form.reg_location.value = "Kamuthi" %}selected="True" {% endif %}>Kamuthi</option>
 	<option {% if form.reg_location.value = "Mudukulathur" %}selected="True" {% endif %}>Mudukulathur</option>
 	<option {% if form.reg_location.value = "Paramakudi" %}selected="True" {% endif %}>Paramakudi</option>
 	<option {% if form.reg_location.value = "Rameswaram" %}selected="True" {% endif %}>Rameswaram</option>
 	<option {% if form.reg_location.value = "Tiruvadanai" %}selected="True" {% endif %}>Tiruvadanai</option>
+-->
+
+	<option {% if form.reg_location.value = "Kadaladi" %}selected="True" {% endif %}>Kadaladi</option>
+	<option {% if form.reg_location.value = "Mudukulathur" %}selected="True" {% endif %}>Mudukulathur</option>
+	<option {% if form.reg_location.value = "Paramakudi" %}selected="True" {% endif %}>Paramakudi</option>
+	<option {% if form.reg_location.value = "Ramanathapuram" %}selected="True" {% endif %}>Ramanathapuram</option>
+	<option {% if form.reg_location.value = "Thiruvadanai" %}selected="True" {% endif %}>Thiruvadanai</option>
+
 </select>
 </div>
 </div>
