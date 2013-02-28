@@ -20,7 +20,7 @@
   	<!-- navbar -->
   	<div class="navbar">
   	<div class="navbar-inner">
-    <center><a class="brand" href="home">Drop For Life</a></center>
+    <center><a class="brand" href="/">Drop For Life</a></center>
    
   </div>
 </div>
@@ -45,8 +45,8 @@
 <!--  				<img class="hidden-phone" alt="DOnate Blood Save Life" src="/static/img/blood_load.png"/>
   	-->			
   			</div>
-  			
   			<div class="span5" >
+			Welcome {{ user }}, <br/><br/>
   	<ul class="nav nav-pills">
     <!-- <li>
     <a href="/home/">Home</a>
@@ -54,9 +54,11 @@
     <li><a href="/search">Search</a></li>
     <li class="active"><a href="/profile">My Profile</a></li>
     <li><a href="/changepswd">Change Password</a></li>
-    <li><a id="lnk_logout" href="/logoutsite">Logout</a></li>
+    <li><a id="lnk_logout" href="/logoff">Logout</a></li>
     </ul>
-    <form class="form-horizontal" method="POST">
+    <form id="profile_form" class="form-horizontal" method="POST">
+    		<input type="hidden" name="load_location" id="load_location" value="yes"/>
+
     	{% if updated %}
     	<div class="alert alert-success">
     	Updated Successfully !!
@@ -98,12 +100,12 @@
 				<br /><span class="error"> {{userprof.prof_dolbd.errors.as_text}}</span>
 
     </div>
-  </div>			
-		 
+  </div>
+
  <div class="control-group">
-    <label class="control-label" for="inputCity">City</label>
+    <label class="control-label" for="inputCityProf">City</label>
     <div class="controls">
-			<select id="inputCity" name="prof_city" value="">
+			<select id="inputCityProf" name="prof_city" value="" onchange="">
 				
 				<option {% if userprof.city == 'Ariyalur' or userprof.prof_city.value == "Ariyalur" %}selected {% endif %}>Ariyalur</option>
 				<option {% if userprof.city == 'Chennai' or userprof.prof_city.value == "Chennai"%}selected {% endif %}>Chennai</option>
@@ -138,9 +140,144 @@
 				<option {% if userprof.city == 'Villupuram' or userprof.prof_city.value == "Villupuram"%}selected {% endif %}>Villupuram</option>
 				<option {% if userprof.city == 'Virudhunagar' or userprof.prof_city.value == "Virudhunagar" %}selected {% endif %} >Virudhunagar</option>
 			</select>
+
     </div>
   </div>		 
 		 
+<!--Fetch Location for each city starts-->
+
+
+	{% if city = "Ariyalur" %}
+	<span> {% include "./reg-area-location/Ariyalur.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Chennai" %}
+	<span> {% include "./reg-area-location/Chennai.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Coimbatore" %}
+	<span> {% include "./reg-area-location/Coimbatore.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Cuddalore" %}
+	<span> {% include "./reg-area-location/Cuddalore.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Dharmapuri" %}
+	<span> {% include "./reg-area-location/Dharmapuri.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Dindigul" %}
+	<span> {% include "./reg-area-location/Dindigul.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Erode" %}
+	<span> {% include "./reg-area-location/Erode.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Kanchipuram" %}
+	<span> {% include "./reg-area-location/Kanchipuram.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Kanyakumari" %}
+	<span> {% include "./reg-area-location/Kanyakumari.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Karur" %}
+	<span> {% include "./reg-area-location/Karur.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Krishnagiri" %}
+	<span> {% include "./reg-area-location/Krishnagiri.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Madurai" %}
+	<span> {% include "./reg-area-location/Madurai.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Nagapattinam" %}
+	<span> {% include "./reg-area-location/Nagapattinam.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Namakkal" %}
+	<span> {% include "./reg-area-location/Namakkal.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Nilgiris" %}
+	<span> {% include "./reg-area-location/Nilgiris.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Perambalur" %}
+	<span> {% include "./reg-area-location/Perambalur.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Pudukottai" %}
+	<span> {% include "./reg-area-location/Pudukottai.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Ramanathapuram" %}
+	<span> {% include "./reg-area-location/Ramanathapuram.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Salem" %}
+	<span> {% include "./reg-area-location/Salem.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Sivaganga" %}
+	<span> {% include "./reg-area-location/Sivaganga.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Thanjavur" %}
+	<span> {% include "./reg-area-location/Thanjavur.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Theni" %}
+	<span> {% include "./reg-area-location/Theni.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Thoothukudi" %}
+	<span> {% include "./reg-area-location/Thoothukudi.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Thiruvarur" %}
+	<span> {% include "./reg-area-location/Thiruvarur.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Tirunelveli" %}
+	<span> {% include "./reg-area-location/Tirunelveli.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Tiruchirappalli" %}
+	<span> {% include "./reg-area-location/Tiruchirappalli.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Thiruvallur" %}
+	<span> {% include "./reg-area-location/Thiruvallur.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Tiruppur" %}
+	<span> {% include "./reg-area-location/Tiruppur.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Tiruvannamalai" %}
+	<span> {% include "./reg-area-location/Tiruvannamalai.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Vellore" %}
+	<span> {% include "./reg-area-location/Vellore.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Villupuram" %}
+	<span> {% include "./reg-area-location/Villupuram.html" %} </span> 
+	{% endif %}
+	
+	{% if city = "Virudhunagar" %}
+	<span> {% include "./reg-area-location/Virudhunagar.html" %} </span> 
+	{% endif %}
+
+
+<!--Fetch Location for each city ends-->
+
 	  <div class="control-group">
     <div class="controls">
       		<button class="btn" type="submit">Save</button>
@@ -164,7 +301,7 @@
   <footer>
   <!-- <div class="navbar"> -->
   <div class="navbar-inner">
-    <center>© 2012-2013 dropforlife.in All rights reserved. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/terms">Terms & Privacy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/siteby">Site design</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/contact">Contact Us</a></center>
+    <center>© 2012-2013 dropforlife.in All rights reserved. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/terms">Terms & Privacy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/site">Site design</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/contact">Contact Us</a></center>
   </div>
  <!-- </div> -->
   </footer>

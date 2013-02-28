@@ -275,6 +275,7 @@ class LoginForm(forms.Form):
 class SearchForm(forms.Form):
     srch_bloodgroup = forms.CharField(6,3)
     srch_city = forms.CharField(20,3)
+    reg_location = forms.CharField(30,3)
     
 class PasswordForm(forms.Form):
     emailid = forms.EmailField()

@@ -110,10 +110,6 @@ def register(request):
             c.update(csrf(request))
             c.update({'script':script})
             return render_to_response('index.html',c)
-
-            
-        
-            
     c = {}
     c.update({"reg":True})
     c.update(csrf(request))
@@ -166,23 +162,31 @@ def home(request):
     return render_to_response('index.html',c)
 
 def search(request):
+    load_location = "no"
+    try:
+        load_location = request.GET["load_location"]
+    except:
+        load_location = "no"
+        
     if islogin(request):
+#       
         city = request.GET.get("srch_city")
         bloodgroup = request.GET.get("srch_bloodgroup")
-#        age = None
+        location = request.GET.get("reg_location")
+    #        age = None
         age = datetime.date.today()
         page = request.GET.get("page")
         if page == None:
             page = 1
         page = int(page)
-        if city != None and bloodgroup != None:
+        if city != None and bloodgroup != None and location !=None:
             today = datetime.date.today()
             three_months = timedelta(days=90)
             eighteen_years = timedelta(days=6570)
-            results = RegisteredUsers.objects.filter(city=city,bloodgroup=bloodgroup).exclude(dolbd__gt=(today-three_months)).exclude(dob__gt=(today-eighteen_years))
-#            results = RegisteredUsers.objects.get(city=city,bloodgroup=bloodgroup).exclude(dolbd__gt=(today-three_months))
-#            age = today - age
-#            age = today - results.dob
+            results = RegisteredUsers.objects.filter(city=city,bloodgroup=bloodgroup,location=location).exclude(dolbd__gt=(today-three_months)).exclude(dob__gt=(today-eighteen_years))
+    #            results = RegisteredUsers.objects.get(city=city,bloodgroup=bloodgroup).exclude(dolbd__gt=(today-three_months))
+    #            age = today - age
+    #            age = today - results.dob
             for res in results:
                 dt = today  - res.dob
                 res.age = dt.days / 365 
@@ -190,7 +194,7 @@ def search(request):
             name = request.session.get("name",None)
             c={}
             c.update({"user":name})
-            c.update({"city":city,"bloodgroup":bloodgroup})
+            c.update({"city":city,"bloodgroup":bloodgroup,"location":location})
             c.update({"age":age})
             try:
                 results = paginator.page(page)
@@ -202,17 +206,20 @@ def search(request):
                 results = paginator.page(paginator.num_pages)
             c.update({"results":results})    
             return render_to_response("search.html",c)
-            
+        
+                
         name = request.session.get("name",None)
         c={}
         c.update({"user":name})
+        c.update({"city":city,"bloodgroup":bloodgroup})
         return render_to_response('search.html',c)
     else:
-        return HttpResponseRedirect("/home")
+        return HttpResponseRedirect("/")
 
-def logoutsite(request):
+def logoff(request):
     logout(request)
-    return HttpResponseRedirect('/home')
+    return HttpResponseRedirect('/')
+
 def profile(request):
     if(islogin(request)):
         if request.method == "POST":
@@ -225,39 +232,46 @@ def profile(request):
                     user.dolbd = form.cleaned_data["prof_dolbd"]
                     user.mobile = str(form.cleaned_data["prof_mobile"])
                     user.city = form.cleaned_data["prof_city"]
+#                    user.location = form.cleaned_data["reg_location"]
                     user.save()
                 except:
-                    return HttpResponse("Error in Connection with Database , Try again "+str(vars(user)))
+                    return HttpResponse("Error in Connection with Database , Please Try again "+str(vars(user)))
                 c={}
                 c.update(csrf(request))
                 email = request.session.get('email',None)
-                c.update({"oldemail":email})
+                name = request.session.get('name',None)
+                c.update({"oldemail":email,"user":name})
                 c.update({"userprof":user,"updated":True})
                 return render_to_response('profile.html',c)
             else:
                 c={}
                 email = request.session.get('email',None)
-                c.update({"oldemail":email})
+                name = request.session.get('name',None)
+                c.update({"oldemail":email,"user":name})
                 c.update(csrf(request))
                 c.update({"userprof":form})
                 return render_to_response('profile.html',c)
         c={}
         c.update(csrf(request))
         email = request.session.get('email',None)
+        name = request.session.get('name',None)
         userprof = RegisteredUsers.objects.get(email=email)
+#        location = userprof.location
         #userprof = userprof[0]
         #return HttpResponse(str(vars(userprof)))
-        c.update({"oldemail":email})
+        c.update({"oldemail":email,"user":name})
         c.update({"userprof":userprof})
+#        c.update({"location":location})
         return render_to_response('profile.html',c)
 #        return render_to_response('profile.html',c)
     else:
-        return HttpResponseRedirect("/home")
+        return HttpResponseRedirect("/")
     
 def changepswd(request):
     if(islogin(request)==False):
-        return HttpResponseRedirect("/home")
+        return HttpResponseRedirect("/")
     emailid = request.session.get("email",None)
+    name = request.session.get("name",None)
     if request.method =="POST":
         form = PasswordForm(request.POST)
         if form.is_valid():
@@ -267,7 +281,7 @@ def changepswd(request):
                 user.save()
                 c= {}
                 c.update(csrf(request))
-                c.update({"emailid":emailid})
+                c.update({"emailid":emailid,"user":name})
                 c.update({"updated":True})
                 return render_to_response("changepswd.html",c)
             except:
@@ -276,7 +290,7 @@ def changepswd(request):
             c={}
             c.update(csrf(request))
             c.update({"passwordform":form})
-            c.update({"emailid":emailid})
+            c.update({"emailid":emailid,"user":name})
             #return HttpResponse(str(vars(form)))
             return render_to_response("changepswd.html",c)    
     c={}
@@ -301,7 +315,6 @@ def forgotpswd(request):
                     c={}
                     c.update({"success":True})
                     c.update(csrf(request))
-                    
                 else:
                     c={}
                     c.update(csrf(request))
@@ -357,8 +370,8 @@ def contact(request):
 def terms(request):
     return render_to_response("terms.html")
 
-def siteby(request):
-    return render_to_response('siteby.html')
+def site(request):
+    return render_to_response('site.html')
 
 def reportinactivity(request):
     return render_to_response('reportuser_redirect.html')

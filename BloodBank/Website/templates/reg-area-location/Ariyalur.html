@@ -2,9 +2,9 @@
 <label class="control-label" for="inputLocation">Location</label>
 	<div class="controls">
 		<select id="inputLocation" name="reg_location">
-			<option {% if form.reg_location.value = "Ariyalur" %}selected="True" {% endif %}>Ariyalur</option>
-			<option {% if form.reg_location.value = "Udayarpalayam" %}selected="True" {% endif %}>Udayarpalayam</option>
-			<option {% if form.reg_location.value = "Sendurai" %}selected="True" {% endif %}>Sendurai</option>
+			<option {% if location = "Ariyalur" %}selected="True" {% endif %}>Ariyalur</option>
+			<option {% if location = "Udayarpalayam" %}selected="True" {% endif %}>Udayarpalayam</option>
+			<option {% if location = "Sendurai" %}selected="True" {% endif %}>Sendurai</option>
 		</select>
 	</div>
 </div>
